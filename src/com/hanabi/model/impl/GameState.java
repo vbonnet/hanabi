@@ -1,6 +1,5 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.Player;
 
 import java.util.Collection;
@@ -21,7 +20,7 @@ public class GameState {
     this(playerList, null);
   }
 
-  public GameState(List<Player> playerList, List<Card> cardList) throws Exception {
+  public GameState(List<Player> playerList, List<CardImpl> cardList) throws Exception {
     if (cardList == null) {
       this.deck = new Deck();
     } else {
@@ -72,8 +71,8 @@ public class GameState {
 
   public Deck getDeck() { return deck; }
 
-  protected Card drawCard(Player player) {
-    Card newCard = deck.getNextCard();
+  protected CardImpl drawCard(Player player) {
+    CardImpl newCard = deck.getNextCard();
     if (newCard != null) {
       Hand playerHand = hands.get(player);
       playerHand.addCard(newCard);
@@ -81,7 +80,7 @@ public class GameState {
     return newCard;
   }
 
-  protected void discardCard(Player player, Card card) {
+  protected void discardCard(Player player, CardImpl card) {
     Hand playerHand =  hands.get(player);
     playerHand.removeCard(card);
   }

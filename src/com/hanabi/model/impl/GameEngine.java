@@ -1,11 +1,11 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.Player;
 import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.GiveClueAction;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
+import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.clue.Clue;
 
 import java.util.List;
@@ -96,19 +96,21 @@ public class GameEngine {
   }
 
   protected void playCard(Player player, Card card) throws Exception {
-    state.discardCard(player, card);
-    if (state.board.canPlayCard(card)) {
-      state.board.playCard(card);
+    CardImpl cardImpl = (CardImpl)card;
+    state.discardCard(player, cardImpl);
+    if (state.board.canPlayCard(cardImpl)) {
+      state.board.playCard(cardImpl);
     } else {
       state.lives--;
-      state.discard.addCard(card);
+      state.discard.addCard(cardImpl);
     }
     state.drawCard(player);
   }
 
   protected void discardCard(Player player, Card card) throws Exception {
-    state.discardCard(player, card);
-    state.discard.addCard(card);
+    CardImpl cardImpl = (CardImpl)card;
+    state.discardCard(player, cardImpl);
+    state.discard.addCard(cardImpl);
     state.drawCard(player);
     if (state.getNumberOfClues() < 8) {
       state.clues++;

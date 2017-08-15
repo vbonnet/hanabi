@@ -1,24 +1,24 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.PlayerHand;
+import com.hanabi.model.facade.card.Card;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Hand implements PlayerHand {
-  List<Card> cards = new ArrayList<>();
+  private List<CardImpl> cards = new ArrayList<>();
 
   @Override
   public List<Card> getCards() {
-    return cards;
+    return new ArrayList<>(cards);
   }
 
-  protected void removeCard(Card card) {
+  protected void removeCard(CardImpl card) {
     cards.remove(card);
   }
 
-  protected void addCard(Card card) {
+  protected void addCard(CardImpl card) {
     cards.add(card);
   }
 }
