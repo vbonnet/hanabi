@@ -36,7 +36,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
 
   @Override
   public Collection<RevealedCard> getDiscard() {
-    return Collections.unmodifiableCollection(state.discard.getCards());
+    return new ArrayList<>(state.discard.getCards());
   }
 
   @Override
@@ -44,17 +44,17 @@ public class PlayerGameViewImpl implements PlayerGameView {
     if (player == this.player) {
       throw new Exception("No peeking!");
     }
-    return Collections.unmodifiableCollection(state.getPlayerHand(player).getCards());
+    return new ArrayList<>(state.getPlayerHand(player).getCards());
   }
 
   @Override
   public Collection<Card> getHand() {
-    return Collections.unmodifiableCollection(state.getPlayerHand(player).getCards());
+    return new ArrayList<>(state.getPlayerHand(player).getCards());
   }
 
   @Override
   public Collection<RevealedCard> getAllCards() {
-    return Collections.unmodifiableCollection(state.allCards);
+    return new ArrayList<>(state.allCards);
   }
 
   @Override
