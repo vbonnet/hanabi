@@ -5,6 +5,7 @@ import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -52,7 +53,14 @@ public class PlayerGameViewImpl implements PlayerGameView {
   }
 
   @Override
-  public Collection<Card> getAllCards() {
+  public Collection<RevealedCard> getAllCards() {
     return Collections.unmodifiableCollection(state.allCards);
+  }
+
+  @Override
+  public Collection<Player> getOtherPlayers() {
+    ArrayList<Player> players = new ArrayList(state.getPlayers());
+    players.remove(player);
+    return players;
   }
 }

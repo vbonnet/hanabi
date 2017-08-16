@@ -17,7 +17,10 @@ public interface Player {
 
   void handlePlayerTakingAction(PlayerAction action);
 
+  void handleClue(PlayerClue clue);
+
   void handlePlayerDrawingCard(Player player, RevealedCard card);
 
   void handleDrawingCard(Card card);
+
 }

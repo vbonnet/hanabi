@@ -1,9 +1,13 @@
 package com.hanabi.model.facade.clue;
 
-class NumberClue implements Clue {
+public class NumberClue implements Clue {
   private final int value;
 
-  protected NumberClue(int value) {
+  public NumberClue(int value) {
     this.value = value;
+  }
+
+  public Integer getNumber() {
+    return value;
   }
 }

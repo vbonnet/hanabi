@@ -11,7 +11,9 @@ public interface PlayerGameView {
   int getNumberOfLives();
 
   Collection<Card> getHand();
-  Collection<Card> getAllCards();
+  Collection<RevealedCard> getAllCards();
   Collection<RevealedCard> getDiscard();
   Collection<RevealedCard> getPlayerHand(Player player) throws Exception;
+
+  Collection<Player> getOtherPlayers();
 }

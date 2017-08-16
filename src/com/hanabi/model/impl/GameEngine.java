@@ -5,12 +5,18 @@ import com.hanabi.model.facade.action.GiveClueAction;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.clue.Clue;
+import com.hanabi.model.facade.clue.ClueType;
+import com.hanabi.model.facade.clue.ColorClue;
+import com.hanabi.model.facade.clue.NumberClue;
 import com.hanabi.model.facade.player.Player;
+import com.hanabi.model.facade.player.PlayerClue;
 import com.hanabi.model.facade.player.PlayerGameView;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameEngine {
 
@@ -98,10 +104,33 @@ public class GameEngine {
   }
 
   private void giveClue(Player playerToClue, Clue clue) throws Exception {
+    playerToClue.handleClue(makePlayerClue(state.getPlayerHand(playerToClue), clue));
     if (state.getNumberOfClues() == 0) {
       throw new Exception("Cannot give clue");
     } else {
       state.clues--;
+    }
+  }
+
+  private PlayerClue makePlayerClue(Hand hand, Clue clue) {
+    if (clue instanceof ColorClue) {
+      ColorClue colorClue = (ColorClue)clue;
+      List<Card> matchingCards = hand
+          .getCards()
+          .stream()
+          .filter(card -> card.getColor() == colorClue.getColor())
+          .collect(Collectors.toList());
+      return new PlayerClue(ClueType.COLOR, matchingCards, colorClue.getColor());
+    } else if (clue instanceof NumberClue) {
+      NumberClue numberClue = (NumberClue)clue;
+      List<Card> matchingCards = hand
+          .getCards()
+          .stream()
+          .filter(card -> card.getValue() == numberClue.getNumber())
+          .collect(Collectors.toList());
+      return new PlayerClue(ClueType.NUMBER, matchingCards, numberClue.getNumber());
+    } else {
+      return null;
     }
   }
 

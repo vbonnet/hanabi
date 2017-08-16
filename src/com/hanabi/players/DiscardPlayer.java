@@ -5,6 +5,7 @@ import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
+import com.hanabi.model.facade.player.PlayerClue;
 import com.hanabi.model.facade.player.PlayerGameView;
 
 import java.util.List;
@@ -35,6 +36,9 @@ public class DiscardPlayer implements Player {
   public void handlePlayerTakingAction(PlayerAction action) {
     // Don't care, we are simple.
   }
+
+  @Override
+  public void handleClue(PlayerClue clue) {}
 
   @Override
   public void handlePlayerDrawingCard(Player player, RevealedCard card) {

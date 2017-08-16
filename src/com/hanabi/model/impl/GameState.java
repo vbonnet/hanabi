@@ -48,6 +48,10 @@ public class GameState {
     }
   }
 
+  public Collection<Player> getPlayers() {
+    return hands.keySet();
+  }
+
   Hand getPlayerHand(Player player) {
     return hands.get(player);
   }
