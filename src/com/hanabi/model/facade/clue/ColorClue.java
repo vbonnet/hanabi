@@ -1,6 +1,6 @@
 package com.hanabi.model.facade.clue;
 
-import com.hanabi.model.facade.Color;
+import com.hanabi.model.facade.card.Color;
 
 public class ColorClue implements Clue {
   public final Color color;

@@ -1,4 +1,4 @@
-package com.hanabi.model.facade;
+package com.hanabi.model.facade.card;
 
 public enum Color {
     BLUE,

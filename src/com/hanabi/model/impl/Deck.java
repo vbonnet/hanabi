@@ -1,6 +1,6 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.Color;
+import com.hanabi.model.facade.card.Color;
 
 import java.util.ArrayList;
 import java.util.Collections;

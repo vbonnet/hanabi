@@ -1,7 +1,6 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.Color;
-import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.Color;
 
 import java.util.HashMap;
 import java.util.Map;
