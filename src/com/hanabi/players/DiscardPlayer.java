@@ -1,12 +1,11 @@
 package com.hanabi.players;
 
-import com.hanabi.model.facade.card.RevealedCard;
-import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.RevealedCard;
+import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
-import com.hanabi.model.impl.GameState;
 
 import java.util.List;
 

@@ -4,18 +4,20 @@ import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 
 public class CardImpl implements RevealedCard {
-  public final int value;
-  public final Color color;
+  private final int value;
+  private final Color color;
 
-  public CardImpl(int value, Color color) {
+  protected CardImpl(int value, Color color) {
     this.value = value;
     this.color = color;
   }
 
+  @Override
   public Color getColor() {
     return color;
   }
 
+  @Override
   public int getValue() {
     return value;
   }

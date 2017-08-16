@@ -2,30 +2,29 @@ package com.hanabi.model.impl;
 
 import com.hanabi.model.facade.player.Player;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameState {
   protected final Map<Player, Hand> hands = new HashMap<>();
   protected final DiscardPile discard = new DiscardPile();
+  protected final Collection<CardImpl> allCards;
   protected final Board board = new Board();
   protected final Deck deck;
 
   protected int lives = 3;
   protected int clues = 8;
 
-  public GameState(List<Player> playerList) throws Exception {
+  protected GameState(List<Player> playerList) throws Exception {
     this(playerList, null);
   }
 
-  public GameState(List<Player> playerList, List<CardImpl> cardList) throws Exception {
+  protected GameState(List<Player> playerList, List<CardImpl> cardList) throws Exception {
     if (cardList == null) {
-      this.deck = new Deck();
-    } else {
-      this.deck = new Deck(cardList);
+      cardList = Deck.fullCardList();
+      Collections.shuffle(cardList);
     }
+    deck = new Deck(cardList);
+    allCards = cardList;
 
     int numberOfPlayers = playerList.size();
     int cardsPerPlayer;
@@ -53,11 +52,11 @@ public class GameState {
     }
   }
 
-  public Hand getPlayerHand(Player player) {
+  protected Hand getPlayerHand(Player player) {
     return hands.get(player);
   }
 
-  public Collection<Hand> getPlayerHands() {
+  protected Collection<Hand> getPlayerHands() {
     return hands.values();
   }
 
@@ -69,7 +68,9 @@ public class GameState {
     return clues;
   }
 
-  public Deck getDeck() { return deck; }
+  public Deck getDeck() {
+    return deck;
+  }
 
   protected CardImpl drawCard(Player player) {
     CardImpl newCard = deck.getNextCard();
@@ -81,7 +82,7 @@ public class GameState {
   }
 
   protected void discardCard(Player player, CardImpl card) {
-    Hand playerHand =  hands.get(player);
+    Hand playerHand = hands.get(player);
     playerHand.removeCard(card);
   }
 

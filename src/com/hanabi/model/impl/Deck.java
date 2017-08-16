@@ -7,7 +7,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Deck {
-  private List<CardImpl> cards;
+  private final List<CardImpl> cards;
+
+  protected Deck(List<CardImpl> cards) {
+    this.cards = new ArrayList<>(cards);
+  }
+
+  protected Deck() {
+    List<CardImpl> cardList = fullCardList();
+    Collections.shuffle(cardList);
+    this.cards = cardList;
+  }
 
   public static List<CardImpl> fullCardList() {
     ArrayList<CardImpl> cardList = new ArrayList<>();
@@ -28,16 +38,6 @@ public class Deck {
       cardList.add(new CardImpl(5, color));
     }
     return cardList;
-  }
-
-  public Deck(List<CardImpl> cards) {
-    this.cards = new ArrayList<>(cards);
-  }
-
-  public Deck() {
-    List<CardImpl> cardList = fullCardList();
-    Collections.shuffle(cardList);
-    this.cards = cardList;
   }
 
   protected CardImpl getNextCard() {

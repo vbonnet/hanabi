@@ -1,20 +1,22 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.GiveClueAction;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.clue.Clue;
+import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class GameEngine {
 
-  GameState state;
-  List<Player> players;
+  private final GameState state;
+  private final List<Player> players;
 
   public GameEngine(List<Player> players) throws Exception {
     int numberOfPlayers = players.size();
@@ -36,7 +38,8 @@ public class GameEngine {
     for (Player player : players) {
       PlayerGameView view = new PlayerGameViewImpl(state, player);
       player.initializeWithView(view);
-      player.initializeWithHand(state.getPlayerHand(player).getCards());
+      player.initializeWithHand(
+          Collections.unmodifiableList(state.getPlayerHand(player).getCards()));
     }
 
     Player currentPlayer = null;
@@ -61,7 +64,7 @@ public class GameEngine {
         break;
       }
       currentPlayer = nextPlayer;
-      PlayerAction action =  currentPlayer.doFinalTurn();
+      PlayerAction action = currentPlayer.doFinalTurn();
       nextPlayer = getNextPlayer(currentPlayer);
       doAction(action);
     } while (currentPlayer != lastPlayer);
@@ -88,7 +91,7 @@ public class GameEngine {
       playCard(playCardAction.getActingPlayer(), playCardAction.getCard());
     }
 
-    for (Player player: players) {
+    for (Player player : players) {
       player.handlePlayerTakingAction(action);
     }
 
@@ -104,7 +107,7 @@ public class GameEngine {
   }
 
   protected void playCard(Player player, Card card) throws Exception {
-    CardImpl cardImpl = (CardImpl)card;
+    CardImpl cardImpl = (CardImpl) card;
     state.discardCard(player, cardImpl);
     if (state.board.canPlayCard(cardImpl)) {
       state.board.playCard(cardImpl);
@@ -116,7 +119,7 @@ public class GameEngine {
   }
 
   protected void discardCard(Player player, Card card) throws Exception {
-    CardImpl cardImpl = (CardImpl)card;
+    CardImpl cardImpl = (CardImpl) card;
     state.discardCard(player, cardImpl);
     state.discard.addCard(cardImpl);
     drawCard(player);

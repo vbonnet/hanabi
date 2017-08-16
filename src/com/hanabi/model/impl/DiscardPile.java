@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class DiscardPile {
   private final List<CardImpl> cards = new ArrayList<>();
 
-  public List<CardImpl> getCards() {
+  protected List<CardImpl> getCards() {
     return cards;
   }
 
@@ -17,12 +17,12 @@ public class DiscardPile {
     cards.add(card);
   }
 
-  public List<CardImpl> getCardByColor(Color color) {
-    return cards.stream().filter(card -> card.color == color).collect(Collectors.toList());
+  protected List<CardImpl> getCardByColor(Color color) {
+    return cards.stream().filter(card -> card.getColor() == color).collect(Collectors.toList());
   }
 
-  public List<CardImpl> getCardByNumber(int value) {
-    return cards.stream().filter(card -> card.value == value).collect(Collectors.toList());
+  protected List<CardImpl> getCardByNumber(int value) {
+    return cards.stream().filter(card -> card.getValue() == value).collect(Collectors.toList());
   }
 
   @Override

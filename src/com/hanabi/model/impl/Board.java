@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Board {
-  private Map<Color, Integer> stacks;
+  private final Map<Color, Integer> stacks;
 
   protected Board() {
     stacks = new HashMap<>();
@@ -15,7 +15,7 @@ public class Board {
     }
   }
 
-  public int getScore() {
+  protected int getScore() {
     int score = 0;
     for (Integer stackScore : stacks.values()) {
       score += stackScore;
@@ -23,14 +23,14 @@ public class Board {
     return score;
   }
 
-  public boolean canPlayCard(CardImpl card) {
-    Integer currentValue = stacks.get(card.color);
-    return card.value == currentValue + 1;
+  protected boolean canPlayCard(CardImpl card) {
+    Integer currentValue = stacks.get(card.getColor());
+    return card.getValue() == currentValue + 1;
   }
 
   protected void playCard(CardImpl card) throws Exception {
     if (canPlayCard(card)) {
-      stacks.put(card.color, card.value);
+      stacks.put(card.getColor(), card.getValue());
     } else {
       throw new Exception("Cannot play that card");
     }
@@ -40,7 +40,7 @@ public class Board {
   public String toString() {
     String s = "";
     for (Map.Entry<Color, Integer> entry : stacks.entrySet()) {
-      s += entry.getKey() +  ": " + entry.getValue() + "\n";
+      s += entry.getKey() + ": " + entry.getValue() + "\n";
     }
     return s;
   }

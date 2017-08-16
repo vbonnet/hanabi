@@ -1,7 +1,7 @@
 package com.hanabi.model.facade.action;
 
-import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.player.Player;
 
 public class DiscardAction implements PlayerAction {
   private final Player actingPlayer;
