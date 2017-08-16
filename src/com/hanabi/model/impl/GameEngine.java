@@ -89,9 +89,7 @@ public class GameEngine {
     }
 
     for (Player player: players) {
-      if (player != action.getActingPlayer()) {
-        player.handlePlayerTakingAction(action);
-      }
+      player.handlePlayerTakingAction(action);
     }
 
     return state.isGameOver();
