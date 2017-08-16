@@ -7,6 +7,7 @@ import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.clue.Clue;
+import com.hanabi.model.facade.player.PlayerGameView;
 
 import java.util.List;
 
@@ -33,7 +34,9 @@ public class GameEngine {
 
   public int run() throws Exception {
     for (Player player : players) {
-      player.initializeWithState(state);
+      PlayerGameView view = new PlayerGameViewImpl(state, player);
+      player.initializeWithView(view);
+      player.initializeWithHand(state.getPlayerHand(player).getCards());
     }
 
     Player currentPlayer = null;

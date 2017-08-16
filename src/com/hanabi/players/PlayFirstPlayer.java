@@ -4,20 +4,25 @@ import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.player.PlayerGameView;
 import com.hanabi.model.impl.GameState;
-import com.hanabi.model.impl.Hand;
 
 import java.util.List;
 
 public class PlayFirstPlayer implements Player {
 
-  private GameState state;
-  private Hand myHand;
+
+  private PlayerGameView view;
+  private List<Card> myCards;
 
   @Override
-  public void initializeWithState(GameState state) {
-    this.state = state;
-    this.myHand = state.getPlayerHand(this);
+  public void initializeWithView(PlayerGameView view) {
+    this.view = view;
+  }
+
+  @Override
+  public void initializeWithHand(List<Card> cards) {
+    myCards = cards;
   }
 
   @Override
@@ -27,7 +32,6 @@ public class PlayFirstPlayer implements Player {
 
   @Override
   public PlayerAction doTurn() {
-    List<Card> myCards = myHand.getCards();
     PlayCardAction action = new PlayCardAction(this, myCards.get(0));
     return action;
   }
