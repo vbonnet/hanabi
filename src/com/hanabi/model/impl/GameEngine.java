@@ -87,6 +87,13 @@ public class GameEngine {
       PlayCardAction playCardAction = (PlayCardAction) action;
       playCard(playCardAction.getActingPlayer(), playCardAction.getCard());
     }
+
+    for (Player player: players) {
+      if (player != action.getActingPlayer()) {
+        player.handlePlayerTakingAction(action);
+      }
+    }
+
     return state.isGameOver();
   }
 
@@ -107,16 +114,29 @@ public class GameEngine {
       state.lives--;
       state.discard.addCard(cardImpl);
     }
-    state.drawCard(player);
+    drawCard(player);
   }
 
   protected void discardCard(Player player, Card card) throws Exception {
     CardImpl cardImpl = (CardImpl)card;
     state.discardCard(player, cardImpl);
     state.discard.addCard(cardImpl);
-    state.drawCard(player);
+    drawCard(player);
     if (state.getNumberOfClues() < 8) {
       state.clues++;
+    }
+  }
+
+  protected void drawCard(Player drawingPlayer) {
+    CardImpl card = state.drawCard(drawingPlayer);
+    if (card != null) {
+      for (Player player : players) {
+        if (player == drawingPlayer) {
+          player.handleDrawingCard(card);
+        } else {
+          player.handlePlayerDrawingCard(player, card);
+        }
+      }
     }
   }
 }

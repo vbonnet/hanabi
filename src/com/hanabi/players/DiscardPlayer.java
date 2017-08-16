@@ -1,5 +1,6 @@
 package com.hanabi.players;
 
+import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.PlayerAction;
@@ -25,11 +26,6 @@ public class DiscardPlayer implements Player {
   }
 
   @Override
-  public void handleAction(PlayerAction action) {
-    // Don't care, we are simple.
-  }
-
-  @Override
   public PlayerAction doTurn() {
     DiscardAction action = new DiscardAction(this, myCards.get(0));
     return action;
@@ -38,5 +34,20 @@ public class DiscardPlayer implements Player {
   @Override
   public PlayerAction doFinalTurn() {
     return doTurn();
+  }
+
+  @Override
+  public void handlePlayerTakingAction(PlayerAction action) {
+    // Don't care, we are simple.
+  }
+
+  @Override
+  public void handlePlayerDrawingCard(Player player, RevealedCard card) {
+    // Don't care, we are simple.
+  }
+
+  @Override
+  public void handleDrawingCard(Card card) {
+    // Don't care, we are simple.
   }
 }
