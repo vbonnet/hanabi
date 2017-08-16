@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public interface PlayerGameView {
   int getSizeOfDeck();
-  int getNumerOfClues();
+  int getNumberOfClues();
   int getNumberOfLives();
 
   Collection<Card> getHand();

@@ -6,14 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DiscardPile {
+class DiscardPile {
   private final List<CardImpl> cards = new ArrayList<>();
 
-  protected List<CardImpl> getCards() {
+  List<CardImpl> getCards() {
     return cards;
   }
 
-  protected void addCard(CardImpl card) {
+  void addCard(CardImpl card) {
     cards.add(card);
   }
 
@@ -27,10 +27,10 @@ public class DiscardPile {
 
   @Override
   public String toString() {
-    String s = "";
+    StringBuilder s = new StringBuilder();
     for (CardImpl card : cards) {
-      s += card.toString() + "\n";
+      s.append(card.toString()).append("\n");
     }
-    return s;
+    return s.toString();
   }
 }

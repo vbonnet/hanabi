@@ -13,11 +13,11 @@ public class Hand implements PlayerHand {
     return new ArrayList<>(cards);
   }
 
-  protected void removeCard(CardImpl card) {
+  void removeCard(CardImpl card) {
     cards.remove(card);
   }
 
-  protected void addCard(CardImpl card) {
+  void addCard(CardImpl card) {
     cards.add(card);
   }
 }

@@ -3,20 +3,13 @@ package com.hanabi.model.impl;
 import com.hanabi.model.facade.card.Color;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class Deck {
   private final List<CardImpl> cards;
 
-  protected Deck(List<CardImpl> cards) {
+  Deck(List<CardImpl> cards) {
     this.cards = new ArrayList<>(cards);
-  }
-
-  protected Deck() {
-    List<CardImpl> cardList = fullCardList();
-    Collections.shuffle(cardList);
-    this.cards = cardList;
   }
 
   public static List<CardImpl> fullCardList() {
@@ -40,7 +33,7 @@ public class Deck {
     return cardList;
   }
 
-  protected CardImpl getNextCard() {
+  CardImpl getNextCard() {
     if (cards.size() == 0) {
       return null;
     }

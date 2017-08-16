@@ -9,7 +9,6 @@ import com.hanabi.model.facade.clue.Clue;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -98,7 +97,7 @@ public class GameEngine {
     return state.isGameOver();
   }
 
-  protected void giveClue(Player playerToClue, Clue clue) throws Exception {
+  private void giveClue(Player playerToClue, Clue clue) throws Exception {
     if (state.getNumberOfClues() == 0) {
       throw new Exception("Cannot give clue");
     } else {
@@ -106,7 +105,7 @@ public class GameEngine {
     }
   }
 
-  protected void playCard(Player player, Card card) throws Exception {
+  private void playCard(Player player, Card card) throws Exception {
     CardImpl cardImpl = (CardImpl) card;
     state.discardCard(player, cardImpl);
     if (state.board.canPlayCard(cardImpl)) {
@@ -118,7 +117,7 @@ public class GameEngine {
     drawCard(player);
   }
 
-  protected void discardCard(Player player, Card card) throws Exception {
+  private void discardCard(Player player, Card card) {
     CardImpl cardImpl = (CardImpl) card;
     state.discardCard(player, cardImpl);
     state.discard.addCard(cardImpl);
@@ -128,7 +127,7 @@ public class GameEngine {
     }
   }
 
-  protected void drawCard(Player drawingPlayer) {
+  private void drawCard(Player drawingPlayer) {
     CardImpl card = state.drawCard(drawingPlayer);
     if (card != null) {
       for (Player player : players) {

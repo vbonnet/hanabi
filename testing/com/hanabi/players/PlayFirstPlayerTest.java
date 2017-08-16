@@ -20,10 +20,8 @@ public class PlayFirstPlayerTest {
     engine.run();
 
     Assert.assertTrue(state.isGameOver());
-    /**
-     * Technically this can, once in a blue moon, not be true. That would require the perfect game to have been
-     * played simply by playing the first card of every player. I'm okay with those odds.
-     **/
+    // Technically this can, once in a blue moon, not be true. That would require the perfect game to have been
+    // played simply by playing the first card of every player. I'm okay with those odds.
     Assert.assertEquals(
         state.getNumberOfLives(),
         0);

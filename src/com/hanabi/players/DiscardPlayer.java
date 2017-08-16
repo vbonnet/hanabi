@@ -11,13 +11,10 @@ import java.util.List;
 
 public class DiscardPlayer implements Player {
 
-  private PlayerGameView view;
   private List<Card> myCards;
 
   @Override
-  public void initializeWithView(PlayerGameView view) {
-    this.view = view;
-  }
+  public void initializeWithView(PlayerGameView view) {}
 
   @Override
   public void initializeWithHand(List<Card> cards) {
@@ -26,8 +23,7 @@ public class DiscardPlayer implements Player {
 
   @Override
   public PlayerAction doTurn() {
-    DiscardAction action = new DiscardAction(this, myCards.get(0));
-    return action;
+    return new DiscardAction(this, myCards.get(0));
   }
 
   @Override

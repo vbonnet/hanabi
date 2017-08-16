@@ -7,7 +7,7 @@ public class CardImpl implements RevealedCard {
   private final int value;
   private final Color color;
 
-  protected CardImpl(int value, Color color) {
+  CardImpl(int value, Color color) {
     this.value = value;
     this.color = color;
   }

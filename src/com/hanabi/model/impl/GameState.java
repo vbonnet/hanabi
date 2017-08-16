@@ -5,20 +5,16 @@ import com.hanabi.model.facade.player.Player;
 import java.util.*;
 
 public class GameState {
-  protected final Map<Player, Hand> hands = new HashMap<>();
-  protected final DiscardPile discard = new DiscardPile();
-  protected final Collection<CardImpl> allCards;
-  protected final Board board = new Board();
-  protected final Deck deck;
+  private final Map<Player, Hand> hands = new HashMap<>();
+  final DiscardPile discard = new DiscardPile();
+  final Collection<CardImpl> allCards;
+  final Board board = new Board();
+  private final Deck deck;
 
-  protected int lives = 3;
-  protected int clues = 8;
+  int lives = 3;
+  int clues = 8;
 
-  protected GameState(List<Player> playerList) throws Exception {
-    this(playerList, null);
-  }
-
-  protected GameState(List<Player> playerList, List<CardImpl> cardList) throws Exception {
+  GameState(List<Player> playerList, List<CardImpl> cardList) {
     if (cardList == null) {
       cardList = Deck.fullCardList();
       Collections.shuffle(cardList);
@@ -52,7 +48,7 @@ public class GameState {
     }
   }
 
-  protected Hand getPlayerHand(Player player) {
+  Hand getPlayerHand(Player player) {
     return hands.get(player);
   }
 
@@ -72,7 +68,7 @@ public class GameState {
     return deck;
   }
 
-  protected CardImpl drawCard(Player player) {
+  CardImpl drawCard(Player player) {
     CardImpl newCard = deck.getNextCard();
     if (newCard != null) {
       Hand playerHand = hands.get(player);
@@ -81,7 +77,7 @@ public class GameState {
     return newCard;
   }
 
-  protected void discardCard(Player player, CardImpl card) {
+  void discardCard(Player player, CardImpl card) {
     Hand playerHand = hands.get(player);
     playerHand.removeCard(card);
   }

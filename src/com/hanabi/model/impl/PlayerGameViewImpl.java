@@ -13,7 +13,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
   private final Player player;
   private final GameState state;
 
-  protected PlayerGameViewImpl(GameState state, Player player) {
+  PlayerGameViewImpl(GameState state, Player player) {
     this.player = player;
     this.state = state;
   }
@@ -29,7 +29,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
   }
 
   @Override
-  public int getNumerOfClues() {
+  public int getNumberOfClues() {
     return state.getNumberOfLives();
   }
 
