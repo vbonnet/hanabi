@@ -1,6 +1,6 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.PlayerHand;
+import com.hanabi.model.facade.player.PlayerHand;
 import com.hanabi.model.facade.card.Card;
 
 import java.util.ArrayList;

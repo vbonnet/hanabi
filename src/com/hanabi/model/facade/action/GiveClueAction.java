@@ -1,7 +1,7 @@
 package com.hanabi.model.facade.action;
 
 import com.hanabi.model.facade.clue.Clue;
-import com.hanabi.model.facade.Player;
+import com.hanabi.model.facade.player.Player;
 
 public class GiveClueAction implements PlayerAction {
   private final Player actingPlayer;

@@ -1,4 +1,4 @@
-package com.hanabi.model.facade;
+package com.hanabi.model.facade.player;
 
 import com.hanabi.model.facade.card.Card;
 

@@ -1,6 +1,6 @@
 package com.hanabi.players;
 
-import com.hanabi.model.facade.Player;
+import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;

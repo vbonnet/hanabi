@@ -1,6 +1,6 @@
 package com.hanabi.players;
 
-import com.hanabi.model.facade.Player;
+import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.impl.GameEngine;
 import com.hanabi.model.impl.GameState;
 import org.junit.Assert;

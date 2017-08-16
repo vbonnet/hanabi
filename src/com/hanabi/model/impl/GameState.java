@@ -1,6 +1,6 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.Player;
+import com.hanabi.model.facade.player.Player;
 
 import java.util.Collection;
 import java.util.HashMap;

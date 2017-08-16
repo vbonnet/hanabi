@@ -1,6 +1,6 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.Player;
+import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.GiveClueAction;
 import com.hanabi.model.facade.action.PlayCardAction;
