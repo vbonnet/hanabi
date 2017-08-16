@@ -6,13 +6,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CardInference {
-  private Set<Color> possibeColors;
+  private Set<Color> possibleColors;
   private Set<Integer> possibleNumbers;
 
   CardInference() {
-    possibeColors = new HashSet<>();
+    possibleColors = new HashSet<>();
     for (Color color: Color.values()) {
-      possibeColors.add(color);
+      possibleColors.add(color);
     }
     possibleNumbers = new HashSet<>();
     for (int i = 1; i <= 5; i++) {
@@ -21,16 +21,16 @@ public class CardInference {
   }
 
   public boolean isKnown() {
-    return possibeColors.size() == 1 && possibleNumbers.size() == 1;
+    return possibleColors.size() == 1 && possibleNumbers.size() == 1;
   }
 
   public void setColor(Color color) {
-    possibeColors.clear();
-    possibeColors.add(color);
+    possibleColors.clear();
+    possibleColors.add(color);
   }
 
   public void removeColor(Color color) {
-    possibeColors.remove(color);
+    possibleColors.remove(color);
   }
 
   public void setNumber(Integer number) {
