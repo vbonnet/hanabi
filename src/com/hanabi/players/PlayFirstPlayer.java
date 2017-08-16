@@ -34,20 +34,14 @@ public class PlayFirstPlayer implements Player {
 
 
   @Override
-  public void handlePlayerTakingAction(PlayerAction action) {
-    // Don't care, we are simple.
-  }
+  public void handlePlayerTakingAction(PlayerAction action) {}
 
   @Override
   public void handleClue(PlayerClue clue) {}
 
   @Override
-  public void handlePlayerDrawingCard(Player player, RevealedCard card) {
-    // Don't care, we are simple.
-  }
+  public void handlePlayerDrawingCard(Player player, RevealedCard card) {}
 
   @Override
-  public void handleDrawingCard(Card card) {
-    // Don't care, we are simple.
-  }
+  public void handleDrawingCard(Card card) {}
 }
