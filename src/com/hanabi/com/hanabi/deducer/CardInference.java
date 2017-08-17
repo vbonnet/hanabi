@@ -15,7 +15,13 @@ public class CardInference {
   }
 
   public boolean isKnown() {
-    return possibleCards.size() == 1;
+    if (possibleCards.size() == 1) {
+      return true;
+    } else {
+      // It's possible we know exactly what the card is but that there's multiple copies
+      // of that card still ou there. We still know it though.
+      return getPossibleColors().size() == 1 && getPossibleNumbers().size() == 1;
+    }
   }
 
   public Collection<RevealedCard> getPossibleCards() {
@@ -35,7 +41,7 @@ public class CardInference {
         .map(card -> card.getNumber())
         .collect(Collectors.toSet());
   }
-  
+
   public void setColor(Color color) {
     possibleCards.removeIf(card -> card.getColor() != color);
   }
