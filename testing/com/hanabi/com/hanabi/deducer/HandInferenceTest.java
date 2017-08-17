@@ -11,97 +11,97 @@ public class HandInferenceTest {
   @Test
   public void testPlayable() {
     FakeGameView view = new FakeGameView();
-    HandInference deducer = new HandInference(view);
-    CardInference inference;
+    HandInference handInference = new HandInference(view);
+    CardInference cardInference;
 
     // One's start out playable
-    inference = new CardInference(deducer.cardCounter);
-    inference.setValue(1);
+    cardInference = new CardInference(handInference.cardCounter);
+    cardInference.setValue(1);
     Assert.assertTrue(
-        deducer.isGuaranteedPlayable(inference));
+        handInference.isGuaranteedPlayable(cardInference));
 
     // Two's are not playable
-    inference = new CardInference(deducer.cardCounter);
-    inference.setValue(1);
+    cardInference = new CardInference(handInference.cardCounter);
+    cardInference.setValue(1);
     Assert.assertTrue(
-        deducer.isGuaranteedPlayable(inference));
+        handInference.isGuaranteedPlayable(cardInference));
 
     // Play the red one
     view.playStacks.put(Color.RED, 1);
 
     // Now not all one's are playable
-    inference = new CardInference(deducer.cardCounter);
-    inference.setValue(1);
+    cardInference = new CardInference(handInference.cardCounter);
+    cardInference.setValue(1);
     Assert.assertFalse(
-        deducer.isGuaranteedPlayable(inference));
+        handInference.isGuaranteedPlayable(cardInference));
 
     // All but the red one should be playable
-    inference = new CardInference(deducer.cardCounter);
-    inference.setValue(1);
-    inference.removeColor(Color.RED);
+    cardInference = new CardInference(handInference.cardCounter);
+    cardInference.setValue(1);
+    cardInference.removeColor(Color.RED);
     Assert.assertTrue(
-        deducer.isGuaranteedPlayable(inference));
+        handInference.isGuaranteedPlayable(cardInference));
 
     // All twos should not be playable
-    inference = new CardInference(deducer.cardCounter);
-    inference.setValue(2);
+    cardInference = new CardInference(handInference.cardCounter);
+    cardInference.setValue(2);
     Assert.assertFalse(
-        deducer.isGuaranteedPlayable(inference));
+        handInference.isGuaranteedPlayable(cardInference));
 
 
     // Red two should be playable
-    inference = new CardInference(deducer.cardCounter);
-    inference.setValue(2);
-    inference.setColor(Color.RED);
+    cardInference = new CardInference(handInference.cardCounter);
+    cardInference.setValue(2);
+    cardInference.setColor(Color.RED);
     Assert.assertTrue(
-        deducer.isGuaranteedPlayable(inference));
+        handInference.isGuaranteedPlayable(cardInference));
   }
 
   @Test
   public void testIsPlayed() {
     FakeGameView view = new FakeGameView();
-    HandInference deducer = new HandInference(view);
+    HandInference handInference = new HandInference(view);
     CardInference inference;
 
     // One's are not already played.
-    inference = new CardInference(deducer.cardCounter);
+    inference = new CardInference(handInference.cardCounter);
     inference.setValue(1);
     Assert.assertFalse(
-        deducer.isAlreadyPlayed(inference));
+        handInference.isAlreadyPlayed(inference));
 
     for (Color color : Color.values()) {
       view.playStacks.put(color, 2);
     }
 
     // One's are played
-    inference = new CardInference(deducer.cardCounter);
+    inference = new CardInference(handInference.cardCounter);
     inference.setValue(1);
     Assert.assertTrue(
-        deducer.isAlreadyPlayed(inference));
+        handInference.isAlreadyPlayed(inference));
 
     // One's and two's are played
-    inference = new CardInference(deducer.cardCounter);
+    inference = new CardInference(handInference.cardCounter);
     inference.removeNumber(3);
     inference.removeNumber(4);
     inference.removeNumber(5);
     Assert.assertTrue(
-        deducer.isAlreadyPlayed(inference));
+        handInference.isAlreadyPlayed(inference));
 
     // Three's are not played
-    inference = new CardInference(deducer.cardCounter);
+    inference = new CardInference(handInference.cardCounter);
     inference.setValue(3);
     Assert.assertFalse(
-        deducer.isAlreadyPlayed(inference));
+        handInference.isAlreadyPlayed(inference));
 
     // Play red three
     view.playStacks.put(Color.RED, 3);
 
     // Red three is played
-    inference = new CardInference(deducer.cardCounter);
+    inference = new CardInference(handInference.cardCounter);
     inference.setValue(3);
     inference.setColor(Color.RED);
     Assert.assertTrue(
-        deducer.isAlreadyPlayed(inference));
+        handInference.isAlreadyPlayed(inference));
 
   }
 
