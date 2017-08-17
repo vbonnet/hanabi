@@ -25,12 +25,12 @@ class Board {
 
   boolean canPlayCard(CardImpl card) {
     Integer currentValue = stacks.get(card.getColor());
-    return card.getValue() == currentValue + 1;
+    return card.getNumber() == currentValue + 1;
   }
 
   void playCard(CardImpl card) throws Exception {
     if (canPlayCard(card)) {
-      stacks.put(card.getColor(), card.getValue());
+      stacks.put(card.getColor(), card.getNumber());
     } else {
       throw new Exception("Cannot play that card");
     }

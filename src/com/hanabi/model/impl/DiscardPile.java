@@ -22,7 +22,7 @@ class DiscardPile {
   }
 
   protected List<CardImpl> getCardByNumber(int value) {
-    return cards.stream().filter(card -> card.getValue() == value).collect(Collectors.toList());
+    return cards.stream().filter(card -> card.getNumber() == value).collect(Collectors.toList());
   }
 
   @Override

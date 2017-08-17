@@ -34,7 +34,7 @@ public class CardInference {
   public Set<Integer> getPossibleNumbers() {
     return possibleCards
         .stream()
-        .map(card -> card.getValue())
+        .map(card -> card.getNumber())
         .collect(Collectors.toSet());
   }
   public void setColor(Color color) {
@@ -46,11 +46,11 @@ public class CardInference {
   }
 
   public void setNumber(Integer number) {
-    possibleCards.removeIf(card -> card.getValue() != number);
+    possibleCards.removeIf(card -> card.getNumber() != number);
   }
 
   public void removeNumber(Integer number) {
-    possibleCards.removeIf(card -> card.getValue() == number);
+    possibleCards.removeIf(card -> card.getNumber() == number);
 
   }
 

@@ -18,7 +18,7 @@ public class CardImpl implements RevealedCard {
   }
 
   @Override
-  public int getValue() {
+  public int getNumber() {
     return value;
   }
 

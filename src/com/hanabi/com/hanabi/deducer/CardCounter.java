@@ -3,7 +3,6 @@ package com.hanabi.com.hanabi.deducer;
 import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
@@ -32,14 +31,14 @@ public class CardCounter {
   public Collection<RevealedCard> getCardsByNumber(Integer number) {
     return remainingCards
         .stream()
-        .filter(c -> c.getValue() == number)
+        .filter(c -> c.getNumber() == number)
         .collect(Collectors.toList());
   }
 
   public Collection<RevealedCard> getCardsByColorAndNumber(Color color, Integer number) {
     return remainingCards
         .stream()
-        .filter(c -> c.getColor() == color && c.getValue() == number)
+        .filter(c -> c.getColor() == color && c.getNumber() == number)
         .collect(Collectors.toList());
   }
 }

@@ -5,7 +5,6 @@ import com.hanabi.model.facade.action.GiveClueAction;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
-import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.clue.Clue;
 import com.hanabi.model.facade.clue.ClueType;
 import com.hanabi.model.facade.clue.ColorClue;
@@ -126,7 +125,7 @@ public class GameEngine {
       List<Card> matchingCards = hand
           .getCards()
           .stream()
-          .filter(card -> card.getValue() == numberClue.getNumber())
+          .filter(card -> card.getNumber() == numberClue.getNumber())
           .collect(Collectors.toList());
       return new PlayerClue(ClueType.NUMBER, matchingCards, numberClue.getNumber());
     } else {
