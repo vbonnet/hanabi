@@ -18,13 +18,13 @@ public class HandDeducerTest {
     inference = new CardInference();
     inference.setValue(1);
     Assert.assertTrue(
-        deducer.isGuarenteedPlayable(inference));
+        deducer.isGuaranteedPlayable(inference));
 
     // Two's are not playable
     inference = new CardInference();
     inference.setValue(1);
     Assert.assertTrue(
-        deducer.isGuarenteedPlayable(inference));
+        deducer.isGuaranteedPlayable(inference));
 
     // Play the red one
     view.playStacks.put(Color.RED, 1);
@@ -33,20 +33,20 @@ public class HandDeducerTest {
     inference = new CardInference();
     inference.setValue(1);
     Assert.assertFalse(
-        deducer.isGuarenteedPlayable(inference));
+        deducer.isGuaranteedPlayable(inference));
 
     // All but the red one should be playable
     inference = new CardInference();
     inference.setValue(1);
     inference.removeColor(Color.RED);
     Assert.assertTrue(
-        deducer.isGuarenteedPlayable(inference));
+        deducer.isGuaranteedPlayable(inference));
 
     // All twos should not be playable
     inference = new CardInference();
     inference.setValue(2);
     Assert.assertFalse(
-        deducer.isGuarenteedPlayable(inference));
+        deducer.isGuaranteedPlayable(inference));
 
 
     // Red two should be playable
@@ -54,7 +54,7 @@ public class HandDeducerTest {
     inference.setValue(2);
     inference.setColor(Color.RED);
     Assert.assertTrue(
-        deducer.isGuarenteedPlayable(inference));
+        deducer.isGuaranteedPlayable(inference));
   }
 
   @Test

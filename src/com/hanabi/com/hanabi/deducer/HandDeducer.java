@@ -54,7 +54,7 @@ public class HandDeducer {
     hand.put(card, new CardInference(cardCounter));
   }
 
-  public boolean isGuarenteedPlayable(CardInference inference) {
+  public boolean isGuaranteedPlayable(CardInference inference) {
     Map<Color, Integer> stacks = view.getPlayStacks();
     for (Color color : inference.getPossibleColors()) {
       Integer currentStackValue = stacks.get(color);
