@@ -51,12 +51,12 @@ public class HandDeducer {
   }
 
   public void processDrawCard(Card card) {
-    hand.put(card, new CardInference());
+    hand.put(card, new CardInference(cardCounter));
   }
 
   public boolean isGuarenteedPlayable(CardInference inference) {
     Map<Color, Integer> stacks = view.getPlayStacks();
-    for (Color color : inference.getPosibleColors()) {
+    for (Color color : inference.getPossibleColors()) {
       Integer currentStackValue = stacks.get(color);
       for (Integer number : inference.getPossibleNumbers()) {
         if (number != currentStackValue + 1) {
@@ -69,7 +69,7 @@ public class HandDeducer {
 
   public boolean isAlreadyPlayed(CardInference inference) {
     Map<Color, Integer> stacks = view.getPlayStacks();
-    for (Color color : inference.getPosibleColors()) {
+    for (Color color : inference.getPossibleColors()) {
       Integer currentStackValue = stacks.get(color);
       for (Integer number : inference.getPossibleNumbers()) {
         if (number > currentStackValue) {
