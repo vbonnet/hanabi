@@ -24,6 +24,13 @@ public class CardInference {
     return possibleColors.size() == 1 && possibleNumbers.size() == 1;
   }
 
+  public Set<Color> getPosibleColors() {
+    return possibleColors;
+  }
+
+  public Set<Integer> getPossibleNumbers() {
+    return possibleNumbers;
+  }
   public void setColor(Color color) {
     possibleColors.clear();
     possibleColors.add(color);

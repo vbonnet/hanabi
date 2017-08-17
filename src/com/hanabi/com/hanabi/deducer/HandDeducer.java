@@ -1,6 +1,7 @@
 package com.hanabi.com.hanabi.deducer;
 
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerClue;
@@ -10,10 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HandDeducer {
+  final PlayerGameView view;
   final CardCounter cardCounter;
   final Map<Card, CardInference> hand = new HashMap<>();
 
   HandDeducer(PlayerGameView view) {
+    this.view = view;
     cardCounter = new CardCounter(view.getAllCards());
     for (Card card : view.getHand()) {
       processDrawCard(card);
@@ -49,5 +52,31 @@ public class HandDeducer {
 
   public void processDrawCard(Card card) {
     hand.put(card, new CardInference());
+  }
+
+  public boolean isGuarenteedPlayable(CardInference inference) {
+    Map<Color, Integer> stacks = view.getPlayStacks();
+    for (Color color : inference.getPosibleColors()) {
+      Integer currentStackValue = stacks.get(color);
+      for (Integer number : inference.getPossibleNumbers()) {
+        if (number != currentStackValue + 1) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  public boolean isAlreadyPlayed(CardInference inference) {
+    Map<Color, Integer> stacks = view.getPlayStacks();
+    for (Color color : inference.getPosibleColors()) {
+      Integer currentStackValue = stacks.get(color);
+      for (Integer number : inference.getPossibleNumbers()) {
+        if (number > currentStackValue) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

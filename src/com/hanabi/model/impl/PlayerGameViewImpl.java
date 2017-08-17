@@ -1,13 +1,12 @@
 package com.hanabi.model.impl;
 
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 public class PlayerGameViewImpl implements PlayerGameView {
 
@@ -62,5 +61,10 @@ public class PlayerGameViewImpl implements PlayerGameView {
     ArrayList<Player> players = new ArrayList(state.getPlayers());
     players.remove(player);
     return players;
+  }
+
+  @Override
+  public Map<Color, Integer> getPlayStacks() {
+    return new HashMap<>(state.board.stacks);
   }
 }

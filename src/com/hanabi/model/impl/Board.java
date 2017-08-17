@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class Board {
-  private final Map<Color, Integer> stacks;
+   final Map<Color, Integer> stacks;
 
   Board() {
     stacks = new HashMap<>();
