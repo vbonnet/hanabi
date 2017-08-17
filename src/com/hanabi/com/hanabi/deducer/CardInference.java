@@ -1,67 +1,57 @@
 package com.hanabi.com.hanabi.deducer;
 
-import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CardInference {
   private CardCounter cardCounter;
-  private Set<Color> possibleColors;
-  private Set<Integer> possibleNumbers;
-
-  CardInference() {
-    this(null);
-  }
+  private Collection<RevealedCard> possibleCards;
 
   CardInference(CardCounter cardCounter) {
     this.cardCounter = cardCounter;
-    possibleColors = new HashSet<>();
-    for (Color color: Color.values()) {
-      possibleColors.add(color);
-    }
-    possibleNumbers = new HashSet<>();
-    for (int i = 1; i <= 5; i++) {
-      possibleNumbers.add(i);
-    }
+    this.possibleCards = cardCounter.getCards();
   }
 
   public boolean isKnown() {
-    return possibleColors.size() == 1 && possibleNumbers.size() == 1;
+    return possibleCards.size() == 1;
+  }
+
+  public Collection<RevealedCard> getPossibleCards() {
+    return possibleCards;
   }
 
   public Set<Color> getPossibleColors() {
-    return possibleColors;
+    return possibleCards
+        .stream()
+        .map(card -> card.getColor())
+        .collect(Collectors.toSet());
   }
 
   public Set<Integer> getPossibleNumbers() {
-    return possibleNumbers;
+    return possibleCards
+        .stream()
+        .map(card -> card.getValue())
+        .collect(Collectors.toSet());
   }
   public void setColor(Color color) {
-    possibleColors.clear();
-    possibleColors.add(color);
-    inferNumber(color);
+    possibleCards.removeIf(card -> card.getColor() != color);
   }
 
   public void removeColor(Color color) {
-    possibleColors.remove(color);
-    if (possibleColors.size() == 1) {
-      inferNumber(possibleColors.iterator().next());
-    }
+    possibleCards.removeIf(card -> card.getColor() == color);
   }
 
   public void setNumber(Integer number) {
-    possibleNumbers.clear();
-    possibleNumbers.add(number);
+    possibleCards.removeIf(card -> card.getValue() != number);
   }
 
   public void removeNumber(Integer number) {
-    possibleNumbers.remove(number);
-    if (possibleNumbers.size() == 1) {
-      inferColor(possibleNumbers.iterator().next());
-    }
+    possibleCards.removeIf(card -> card.getValue() == number);
+
   }
 
   public void setValue(Object object ) {
@@ -78,39 +68,5 @@ public class CardInference {
     } else if (object instanceof Integer) {
       removeNumber((Integer)object);
     }
-  }
-
-  private void inferNumber(Color color) {
-    if (cardCounter == null) {
-      return;
-    }
-    if (isKnown()) {
-      // no need to waste time making inferences.
-      return;
-    }
-
-    // Remove any numbers that don't show up in the remaining cards with that color.
-    Set<Integer> remainingNumbers = new HashSet<>();
-    for (RevealedCard card : cardCounter.getCardsByColor(color)) {
-      remainingNumbers.add(card.getValue());
-    }
-    possibleNumbers.retainAll(remainingNumbers);
-  }
-
-  private void inferColor(Integer number) {
-    if (cardCounter == null) {
-      return;
-    }
-    if (isKnown()) {
-      // no need to waste time making inferences.
-      return;
-    }
-
-    // Remove any colors that don't show up in the remaining cards with that number.
-    Set<Color> remainingColors = new HashSet<>();
-    for (RevealedCard card : cardCounter.getCardsByNumber(number)) {
-      remainingColors.add(card.getColor());
-    }
-    possibleColors.retainAll(remainingColors);
   }
 }

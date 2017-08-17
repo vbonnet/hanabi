@@ -5,6 +5,7 @@ import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
+import com.hanabi.model.impl.Deck;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ public class FakeGameView implements PlayerGameView {
   public Map<Color, Integer> playStacks;
 
   public FakeGameView() {
-    this(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+    this(new ArrayList<>(), new ArrayList<>(Deck.fullCardList()), new ArrayList<>());
   }
 
   public FakeGameView(
