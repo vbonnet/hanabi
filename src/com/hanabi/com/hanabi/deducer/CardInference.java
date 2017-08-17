@@ -8,11 +8,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CardInference {
-  private CardCounter cardCounter;
   private Collection<RevealedCard> possibleCards;
 
   CardInference(CardCounter cardCounter) {
-    this.cardCounter = cardCounter;
     this.possibleCards = cardCounter.getCards();
   }
 
@@ -37,6 +35,7 @@ public class CardInference {
         .map(card -> card.getNumber())
         .collect(Collectors.toSet());
   }
+  
   public void setColor(Color color) {
     possibleCards.removeIf(card -> card.getColor() != color);
   }
