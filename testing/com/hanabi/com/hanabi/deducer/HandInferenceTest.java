@@ -6,12 +6,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public class HandDeducerTest {
+public class HandInferenceTest {
 
   @Test
   public void testPlayable() {
     FakeGameView view = new FakeGameView();
-    HandDeducer deducer = new HandDeducer(view);
+    HandInference deducer = new HandInference(view);
     CardInference inference;
 
     // One's start out playable
@@ -60,7 +60,7 @@ public class HandDeducerTest {
   @Test
   public void testIsPlayed() {
     FakeGameView view = new FakeGameView();
-    HandDeducer deducer = new HandDeducer(view);
+    HandInference deducer = new HandInference(view);
     CardInference inference;
 
     // One's are not already played.

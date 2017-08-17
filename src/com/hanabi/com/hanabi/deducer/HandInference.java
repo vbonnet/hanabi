@@ -10,12 +10,12 @@ import com.hanabi.model.facade.player.PlayerGameView;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HandDeducer {
+public class HandInference {
   final PlayerGameView view;
   final CardCounter cardCounter;
   final Map<Card, CardInference> hand = new HashMap<>();
 
-  HandDeducer(PlayerGameView view) {
+  HandInference(PlayerGameView view) {
     this.view = view;
     cardCounter = new CardCounter(view.getAllCards());
     for (Card card : view.getHand()) {
