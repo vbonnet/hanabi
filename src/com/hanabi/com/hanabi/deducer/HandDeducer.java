@@ -19,7 +19,7 @@ public class HandDeducer {
     this.view = view;
     cardCounter = new CardCounter(view.getAllCards());
     for (Card card : view.getHand()) {
-      processDrawCard(card);
+      processCardDrawn(card);
     }
     try {
       for (Player player : view.getOtherPlayers()) {
@@ -50,7 +50,7 @@ public class HandDeducer {
     cardCounter.remove(card);
   }
 
-  public void processDrawCard(Card card) {
+  public void processCardDrawn(Card card) {
     hand.put(card, new CardInference(cardCounter));
   }
 
