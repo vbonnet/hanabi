@@ -58,7 +58,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
 
   @Override
   public List<Player> getOtherPlayers() {
-    ArrayList<Player> players = new ArrayList(state.getPlayers());
+    ArrayList<Player> players = new ArrayList<>(state.getPlayers());
     players.remove(player);
     return players;
   }

@@ -30,11 +30,7 @@ public class MapCounter<T> {
   }
 
   public int getCount(T t) {
-    if (counter.containsKey(t)) {
-      return counter.get(t);
-    } else {
-      return 0;
-    }
+    return counter.getOrDefault(t, 0);
   }
 
   public int size() {
@@ -46,12 +42,6 @@ public class MapCounter<T> {
   }
 
   public void removeIf(Predicate<? super T> filter) {
-    Iterator<Map.Entry<T, Integer>> it = counter.entrySet().iterator();
-    while (it.hasNext()) {
-      Map.Entry<T, Integer> entry = it.next();
-      if (filter.test(entry.getKey())) {
-        it.remove();
-      }
-    }
+    counter.entrySet().removeIf(entry -> filter.test(entry.getKey()));
   }
 }

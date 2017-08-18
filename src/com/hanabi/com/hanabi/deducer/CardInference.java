@@ -5,8 +5,6 @@ import com.hanabi.model.facade.card.Card;
 import com.hanabi.util.MapCounter;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,7 +32,7 @@ public class CardInference implements  CardCounterListener {
     return possibleCards
         .keySet()
         .stream()
-        .map(card -> card.getColor())
+        .map(Card::getColor)
         .collect(Collectors.toSet());
   }
 
@@ -42,7 +40,7 @@ public class CardInference implements  CardCounterListener {
     return possibleCards
         .keySet()
         .stream()
-        .map(card -> card.getNumber())
+        .map(Card::getNumber)
         .collect(Collectors.toSet());
   }
 

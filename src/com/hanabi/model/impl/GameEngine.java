@@ -15,6 +15,7 @@ import com.hanabi.model.facade.player.PlayerGameView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class GameEngine {
@@ -119,7 +120,7 @@ public class GameEngine {
           .entrySet()
           .stream()
           .filter(entry -> entry.getValue().getColor() == colorClue.getColor())
-          .map(entry -> entry.getKey())
+          .map(Map.Entry::getKey)
           .collect(Collectors.toList());
       return new PlayerClue(ClueType.COLOR, matchingCards, colorClue.getColor());
     } else if (clue instanceof NumberClue) {
@@ -129,7 +130,7 @@ public class GameEngine {
           .entrySet()
           .stream()
           .filter(entry -> entry.getValue().getNumber() == numberClue.getNumber())
-          .map(entry -> entry.getKey())
+          .map(Map.Entry::getKey)
           .collect(Collectors.toList());
       return new PlayerClue(ClueType.NUMBER, matchingCards, numberClue.getNumber());
     } else {
