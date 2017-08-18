@@ -4,7 +4,7 @@ import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.GiveClueAction;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
-import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.clue.Clue;
 import com.hanabi.model.facade.clue.ClueType;
 import com.hanabi.model.facade.clue.ColorClue;
@@ -13,7 +13,7 @@ import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerClue;
 import com.hanabi.model.facade.player.PlayerGameView;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,7 +43,7 @@ public class GameEngine {
       PlayerGameView view = new PlayerGameViewImpl(state, player);
       player.initializeWithView(view);
       player.initializeWithHand(
-          Collections.unmodifiableList(state.getPlayerHand(player).getCards()));
+          new ArrayList<>(state.getPlayerHand(player).getPlaceholders()));
     }
 
     Player currentPlayer = null;
@@ -114,18 +114,22 @@ public class GameEngine {
   private PlayerClue makePlayerClue(Hand hand, Clue clue) {
     if (clue instanceof ColorClue) {
       ColorClue colorClue = (ColorClue)clue;
-      List<Card> matchingCards = hand
-          .getCards()
+      List<CardPlaceholder> matchingCards = hand
+          .cards
+          .entrySet()
           .stream()
-          .filter(card -> card.getColor() == colorClue.getColor())
+          .filter(entry -> entry.getValue().getColor() == colorClue.getColor())
+          .map(entry -> entry.getKey())
           .collect(Collectors.toList());
       return new PlayerClue(ClueType.COLOR, matchingCards, colorClue.getColor());
     } else if (clue instanceof NumberClue) {
       NumberClue numberClue = (NumberClue)clue;
-      List<Card> matchingCards = hand
-          .getCards()
+      List<CardPlaceholder> matchingCards = hand
+          .cards
+          .entrySet()
           .stream()
-          .filter(card -> card.getNumber() == numberClue.getNumber())
+          .filter(entry -> entry.getValue().getNumber() == numberClue.getNumber())
+          .map(entry -> entry.getKey())
           .collect(Collectors.toList());
       return new PlayerClue(ClueType.NUMBER, matchingCards, numberClue.getNumber());
     } else {
@@ -133,9 +137,9 @@ public class GameEngine {
     }
   }
 
-  private void playCard(Player player, Card card) throws Exception {
-    CardImpl cardImpl = (CardImpl) card;
-    state.discardCard(player, cardImpl);
+  private void playCard(Player player, CardPlaceholder placeholder) throws Exception {
+    CardImpl cardImpl = state.getPlayerHand(player).getCard(placeholder);
+    state.discardCard(player, placeholder);
     if (state.board.canPlayCard(cardImpl)) {
       state.board.playCard(cardImpl);
     } else {
@@ -145,9 +149,9 @@ public class GameEngine {
     drawCard(player);
   }
 
-  private void discardCard(Player player, Card card) {
-    CardImpl cardImpl = (CardImpl) card;
-    state.discardCard(player, cardImpl);
+  private void discardCard(Player player, CardPlaceholder placeholder) {
+    CardImpl cardImpl = state.getPlayerHand(player).getCard(placeholder);
+    state.discardCard(player, placeholder);
     state.discard.addCard(cardImpl);
     drawCard(player);
     if (state.getNumberOfClues() < 8) {
@@ -156,11 +160,12 @@ public class GameEngine {
   }
 
   private void drawCard(Player drawingPlayer) {
-    CardImpl card = state.drawCard(drawingPlayer);
-    if (card != null) {
+    CardPlaceholder placeholder = state.drawCard(drawingPlayer);
+    if (placeholder != null) {
+      CardImpl card = state.getPlayerHand(drawingPlayer).getCard(placeholder);
       for (Player player : players) {
         if (player == drawingPlayer) {
-          player.handleDrawingCard(card);
+          player.handleDrawingCard(placeholder);
         } else {
           player.handlePlayerDrawingCard(player, card);
         }

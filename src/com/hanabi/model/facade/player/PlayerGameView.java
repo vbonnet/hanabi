@@ -1,10 +1,11 @@
 package com.hanabi.model.facade.player;
 
-import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public interface PlayerGameView {
@@ -12,7 +13,7 @@ public interface PlayerGameView {
   int getNumberOfClues();
   int getNumberOfLives();
 
-  Collection<Card> getHand();
+  List<CardPlaceholder> getHand();
   Collection<RevealedCard> getAllCards();
   Collection<RevealedCard> getDiscard();
   Collection<RevealedCard> getPlayerHand(Player player) throws Exception;

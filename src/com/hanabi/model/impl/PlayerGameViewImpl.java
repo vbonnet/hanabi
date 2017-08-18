@@ -1,6 +1,6 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
@@ -47,8 +47,8 @@ public class PlayerGameViewImpl implements PlayerGameView {
   }
 
   @Override
-  public Collection<Card> getHand() {
-    return new ArrayList<>(state.getPlayerHand(player).getCards());
+  public List<CardPlaceholder> getHand() {
+    return new ArrayList<>(state.getPlayerHand(player).getPlaceholders());
   }
 
   @Override

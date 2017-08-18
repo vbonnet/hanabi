@@ -1,5 +1,6 @@
 package com.hanabi.model.impl;
 
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.player.Player;
 
 import java.util.*;
@@ -72,18 +73,19 @@ public class GameState {
     return deck;
   }
 
-  CardImpl drawCard(Player player) {
+  CardPlaceholder drawCard(Player player) {
     CardImpl newCard = deck.getNextCard();
+    CardPlaceholder placeholder = null;
     if (newCard != null) {
       Hand playerHand = hands.get(player);
-      playerHand.addCard(newCard);
+      placeholder = playerHand.addCard(newCard);
     }
-    return newCard;
+    return placeholder;
   }
 
-  void discardCard(Player player, CardImpl card) {
+  void discardCard(Player player, CardPlaceholder placeholder) {
     Hand playerHand = hands.get(player);
-    playerHand.removeCard(card);
+    playerHand.removeCard(placeholder);
   }
 
   private Hand makeHand(int numberOfCards) {

@@ -2,7 +2,7 @@ package com.hanabi.players;
 
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
-import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerClue;
@@ -12,19 +12,19 @@ import java.util.List;
 
 public class PlayFirstPlayer implements Player {
 
-  private List<Card> myCards;
+  private PlayerGameView view;
 
   @Override
-  public void initializeWithView(PlayerGameView view) {}
-
-  @Override
-  public void initializeWithHand(List<Card> cards) {
-    myCards = cards;
+  public void initializeWithView(PlayerGameView view) {
+    this.view = view;
   }
 
   @Override
+  public void initializeWithHand(List<CardPlaceholder> cards) {}
+
+  @Override
   public PlayerAction doTurn() {
-    return new PlayCardAction(this, myCards.get(0));
+    return new PlayCardAction(this, view.getHand().get(0));
   }
 
   @Override
@@ -43,5 +43,5 @@ public class PlayFirstPlayer implements Player {
   public void handlePlayerDrawingCard(Player player, RevealedCard card) {}
 
   @Override
-  public void handleDrawingCard(Card card) {}
+  public void handleDrawingCard(CardPlaceholder card) {}
 }

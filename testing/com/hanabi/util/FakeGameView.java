@@ -1,18 +1,22 @@
 package com.hanabi.util;
 
-import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
 import com.hanabi.model.impl.Deck;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FakeGameView implements PlayerGameView {
-  public List<RevealedCard> hand;
+  public Map<CardPlaceholder, RevealedCard> hand;
   public List<RevealedCard> deck;
   public List<RevealedCard> discard;
 
@@ -20,11 +24,11 @@ public class FakeGameView implements PlayerGameView {
   public Map<Color, Integer> playStacks;
 
   public FakeGameView() {
-    this(new ArrayList<>(), new ArrayList<>(Deck.fullCardList()), new ArrayList<>());
+    this(new HashMap<>(), new ArrayList<>(Deck.fullCardList()), new ArrayList<>());
   }
 
   public FakeGameView(
-      List<RevealedCard> hand,
+      Map<CardPlaceholder, RevealedCard> hand,
       List<RevealedCard> deck,
       List<RevealedCard> discard) {
     this(hand, deck, discard, new HashMap<>());
@@ -34,7 +38,7 @@ public class FakeGameView implements PlayerGameView {
   }
 
   public FakeGameView(
-        List<RevealedCard> hand,
+        Map<CardPlaceholder, RevealedCard> hand,
         List<RevealedCard> deck,
         List<RevealedCard> discard,
         Map<Color, Integer> playStacks) {
@@ -70,8 +74,8 @@ public class FakeGameView implements PlayerGameView {
   }
 
   @Override
-  public Collection<Card> getHand() {
-    return new ArrayList<>(hand);
+  public List<CardPlaceholder> getHand() {
+    return new ArrayList<>(hand.keySet());
   }
 
   @Override
@@ -79,7 +83,7 @@ public class FakeGameView implements PlayerGameView {
     return Stream.of(
         deck.stream(),
         discard.stream(),
-        hand.stream()).flatMap(s -> s).collect(Collectors.toList());
+        hand.values().stream()).flatMap(s -> s).collect(Collectors.toList());
   }
 
   @Override

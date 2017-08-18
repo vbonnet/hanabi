@@ -1,23 +1,36 @@
 package com.hanabi.model.impl;
 
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.player.PlayerHand;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
 public class Hand implements PlayerHand {
-  private final List<CardImpl> cards = new ArrayList<>();
+  final HashMap<CardPlaceholder, CardImpl> cards = new HashMap<>();
 
   @Override
   public List<CardImpl> getCards() {
-    return new ArrayList<>(cards);
+    return new ArrayList<>(cards.values());
   }
 
-  void removeCard(CardImpl card) {
-    cards.remove(card);
+  Collection<CardPlaceholder> getPlaceholders() {
+    return cards.keySet();
   }
 
-  void addCard(CardImpl card) {
-    cards.add(card);
+  CardImpl getCard(CardPlaceholder placeholder) {
+    return cards.get(placeholder);
+  }
+
+  void removeCard(CardPlaceholder placeholder) {
+    cards.remove(placeholder);
+  }
+
+  CardPlaceholder addCard(CardImpl card) {
+    CardPlaceholder placeholder = new CardPlaceholder();
+    cards.put(placeholder, card);
+    return placeholder;
   }
 }

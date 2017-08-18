@@ -1,6 +1,6 @@
 package com.hanabi.com.hanabi.deducer;
 
-import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.card.Color;
 import com.hanabi.model.facade.card.RevealedCard;
 import com.hanabi.model.facade.player.Player;
@@ -13,12 +13,12 @@ import java.util.Map;
 public class HandInference {
   final PlayerGameView view;
   final CardCounter cardCounter;
-  final Map<Card, CardInference> hand = new HashMap<>();
+  final Map<CardPlaceholder, CardInference> hand = new HashMap<>();
 
   HandInference(PlayerGameView view) {
     this.view = view;
     cardCounter = new CardCounter(view.getAllCards());
-    for (Card card : view.getHand()) {
+    for (CardPlaceholder card : view.getHand()) {
       processCardDrawn(card);
     }
     try {
@@ -33,7 +33,7 @@ public class HandInference {
   }
 
   public void processClue(PlayerClue clue) {
-    for (Map.Entry<Card, CardInference> entry : hand.entrySet()) {
+    for (Map.Entry<CardPlaceholder, CardInference> entry : hand.entrySet()) {
       CardInference inference = entry.getValue();
       if (clue.cards.contains(entry.getKey())) {
         inference.setValue(clue.value);
@@ -50,7 +50,7 @@ public class HandInference {
     cardCounter.remove(card);
   }
 
-  public void processCardDrawn(Card card) {
+  public void processCardDrawn(CardPlaceholder card) {
     hand.put(card, new CardInference(cardCounter));
   }
 
