@@ -7,11 +7,12 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CardInference {
+public class CardInference implements  CardCounterListener {
   private Collection<RevealedCard> possibleCards;
 
   CardInference(CardCounter cardCounter) {
     this.possibleCards = cardCounter.getCards();
+    cardCounter.addListener(this);
   }
 
   public boolean isKnown() {
@@ -73,5 +74,10 @@ public class CardInference {
     } else if (object instanceof Integer) {
       removeNumber((Integer)object);
     }
+  }
+
+  @Override
+  public void handleCardRemoved(RevealedCard card) {
+    possibleCards.remove(card);
   }
 }
