@@ -2,7 +2,7 @@ package com.hanabi.model.impl;
 
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.card.Color;
-import com.hanabi.model.facade.card.RevealedCard;
+import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
 
@@ -34,12 +34,12 @@ public class PlayerGameViewImpl implements PlayerGameView {
   }
 
   @Override
-  public Collection<RevealedCard> getDiscard() {
+  public Collection<Card> getDiscard() {
     return new ArrayList<>(state.discard.getCards());
   }
 
   @Override
-  public Collection<RevealedCard> getPlayerHand(Player player) throws Exception {
+  public Collection<Card> getPlayerHand(Player player) throws Exception {
     if (player == this.player) {
       throw new Exception("No peeking!");
     }
@@ -52,7 +52,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
   }
 
   @Override
-  public Collection<RevealedCard> getAllCards() {
+  public Collection<Card> getAllCards() {
     return new ArrayList<>(state.allCards);
   }
 

@@ -1,14 +1,14 @@
 package com.hanabi.com.hanabi.deducer;
 
 import com.hanabi.model.facade.card.Color;
-import com.hanabi.model.facade.card.RevealedCard;
+import com.hanabi.model.facade.card.Card;
 
 import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CardInference implements  CardCounterListener {
-  private Collection<RevealedCard> possibleCards;
+  private Collection<Card> possibleCards;
 
   CardInference(CardCounter cardCounter) {
     this.possibleCards = cardCounter.getCards();
@@ -25,7 +25,7 @@ public class CardInference implements  CardCounterListener {
     }
   }
 
-  public Collection<RevealedCard> getPossibleCards() {
+  public Collection<Card> getPossibleCards() {
     return possibleCards;
   }
 
@@ -77,7 +77,7 @@ public class CardInference implements  CardCounterListener {
   }
 
   @Override
-  public void handleCardRemoved(RevealedCard card) {
+  public void handleCardRemoved(Card card) {
     possibleCards.remove(card);
   }
 }

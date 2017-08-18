@@ -2,7 +2,7 @@ package com.hanabi.util;
 
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.card.Color;
-import com.hanabi.model.facade.card.RevealedCard;
+import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
 import com.hanabi.model.impl.Deck;
@@ -16,11 +16,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FakeGameView implements PlayerGameView {
-  public Map<CardPlaceholder, RevealedCard> hand;
-  public List<RevealedCard> deck;
-  public List<RevealedCard> discard;
+  public Map<CardPlaceholder, Card> hand;
+  public List<Card> deck;
+  public List<Card> discard;
 
-  public Map<Player, List<RevealedCard>> otherPlayers = new HashMap<>();
+  public Map<Player, List<Card>> otherPlayers = new HashMap<>();
   public Map<Color, Integer> playStacks;
 
   public FakeGameView() {
@@ -28,9 +28,9 @@ public class FakeGameView implements PlayerGameView {
   }
 
   public FakeGameView(
-      Map<CardPlaceholder, RevealedCard> hand,
-      List<RevealedCard> deck,
-      List<RevealedCard> discard) {
+      Map<CardPlaceholder, Card> hand,
+      List<Card> deck,
+      List<Card> discard) {
     this(hand, deck, discard, new HashMap<>());
     for (Color color : Color.values()) {
       playStacks.put(color, 0);
@@ -38,9 +38,9 @@ public class FakeGameView implements PlayerGameView {
   }
 
   public FakeGameView(
-        Map<CardPlaceholder, RevealedCard> hand,
-        List<RevealedCard> deck,
-        List<RevealedCard> discard,
+        Map<CardPlaceholder, Card> hand,
+        List<Card> deck,
+        List<Card> discard,
         Map<Color, Integer> playStacks) {
     this.hand = hand;
     this.deck = deck;
@@ -64,12 +64,12 @@ public class FakeGameView implements PlayerGameView {
   }
 
   @Override
-  public Collection<RevealedCard> getDiscard() {
+  public Collection<Card> getDiscard() {
     return discard;
   }
 
   @Override
-  public Collection<RevealedCard> getPlayerHand(Player player) throws Exception {
+  public Collection<Card> getPlayerHand(Player player) throws Exception {
     return otherPlayers.get(player);
   }
 
@@ -79,7 +79,7 @@ public class FakeGameView implements PlayerGameView {
   }
 
   @Override
-  public Collection<RevealedCard> getAllCards() {
+  public Collection<Card> getAllCards() {
     return Stream.of(
         deck.stream(),
         discard.stream(),

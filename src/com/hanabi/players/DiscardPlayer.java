@@ -3,7 +3,7 @@ package com.hanabi.players;
 import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.CardPlaceholder;
-import com.hanabi.model.facade.card.RevealedCard;
+import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerClue;
 import com.hanabi.model.facade.player.PlayerGameView;
@@ -39,7 +39,7 @@ public class DiscardPlayer implements Player {
   public void handleClue(PlayerClue clue) {}
 
   @Override
-  public void handlePlayerDrawingCard(Player player, RevealedCard card) {}
+  public void handlePlayerDrawingCard(Player player, Card card) {}
 
   @Override
   public void handleDrawingCard(CardPlaceholder card) {}

@@ -1,7 +1,7 @@
 package com.hanabi.com.hanabi.deducer;
 
 import com.hanabi.model.facade.card.Color;
-import com.hanabi.model.facade.card.RevealedCard;
+import com.hanabi.model.facade.card.Card;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -9,39 +9,39 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 public class CardCounter {
-  Collection<RevealedCard> remainingCards;
+  Collection<Card> remainingCards;
   final HashSet<CardCounterListener> listeners = new HashSet<>();
 
-  CardCounter(Collection<RevealedCard> cards) {
+  CardCounter(Collection<Card> cards) {
     this.remainingCards = cards;
   }
 
-  public void remove(RevealedCard card) {
+  public void remove(Card card) {
     remainingCards.remove(card);
     for (CardCounterListener listener : listeners) {
       listener.handleCardRemoved(card);
     }
   }
 
-  public Collection<RevealedCard> getCards() {
+  public Collection<Card> getCards() {
     return new ArrayList<>(remainingCards);
   }
 
-  public Collection<RevealedCard> getCardsByColor(Color color) {
+  public Collection<Card> getCardsByColor(Color color) {
     return remainingCards
         .stream()
         .filter(c -> c.getColor() == color)
         .collect(Collectors.toList());
   }
 
-  public Collection<RevealedCard> getCardsByNumber(Integer number) {
+  public Collection<Card> getCardsByNumber(Integer number) {
     return remainingCards
         .stream()
         .filter(c -> c.getNumber() == number)
         .collect(Collectors.toList());
   }
 
-  public Collection<RevealedCard> getCardsByColorAndNumber(Color color, Integer number) {
+  public Collection<Card> getCardsByColorAndNumber(Color color, Integer number) {
     return remainingCards
         .stream()
         .filter(c -> c.getColor() == color && c.getNumber() == number)

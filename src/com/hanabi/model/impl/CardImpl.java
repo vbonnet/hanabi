@@ -1,9 +1,9 @@
 package com.hanabi.model.impl;
 
 import com.hanabi.model.facade.card.Color;
-import com.hanabi.model.facade.card.RevealedCard;
+import com.hanabi.model.facade.card.Card;
 
-public class CardImpl implements RevealedCard {
+public class CardImpl implements Card {
   private final int value;
   private final Color color;
 

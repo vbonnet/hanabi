@@ -2,7 +2,7 @@ package com.hanabi.model.facade.player;
 
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.CardPlaceholder;
-import com.hanabi.model.facade.card.RevealedCard;
+import com.hanabi.model.facade.card.Card;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public interface Player {
 
   void handleClue(PlayerClue clue);
 
-  void handlePlayerDrawingCard(Player player, RevealedCard card);
+  void handlePlayerDrawingCard(Player player, Card card);
 
   void handleDrawingCard(CardPlaceholder card);
 

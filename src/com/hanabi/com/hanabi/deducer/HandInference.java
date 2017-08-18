@@ -2,7 +2,7 @@ package com.hanabi.com.hanabi.deducer;
 
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.card.Color;
-import com.hanabi.model.facade.card.RevealedCard;
+import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerClue;
 import com.hanabi.model.facade.player.PlayerGameView;
@@ -23,7 +23,7 @@ public class HandInference {
     }
     try {
       for (Player player : view.getOtherPlayers()) {
-        for (RevealedCard card : view.getPlayerHand(player)) {
+        for (Card card : view.getPlayerHand(player)) {
           processCardRevealed(card);
         }
       }
@@ -43,7 +43,7 @@ public class HandInference {
     }
   }
 
-  public void processCardRevealed(RevealedCard card) {
+  public void processCardRevealed(Card card) {
     if (hand.containsKey(card)) {
       hand.remove(card);
     }
@@ -56,7 +56,7 @@ public class HandInference {
 
   public boolean isGuaranteedPlayable(CardInference inference) {
     Map<Color, Integer> stacks = view.getPlayStacks();
-    for (RevealedCard card : inference.getPossibleCards()) {
+    for (Card card : inference.getPossibleCards()) {
       if (card.getNumber() != stacks.get(card.getColor()) + 1) {
         return false;
       }
@@ -66,7 +66,7 @@ public class HandInference {
 
   public boolean isAlreadyPlayed(CardInference inference) {
     Map<Color, Integer> stacks = view.getPlayStacks();
-    for (RevealedCard card : inference.getPossibleCards()) {
+    for (Card card : inference.getPossibleCards()) {
       if (card.getNumber() > stacks.get(card.getColor())) {
         return false;
       }
