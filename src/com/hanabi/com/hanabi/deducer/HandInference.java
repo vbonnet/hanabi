@@ -18,17 +18,21 @@ public class HandInference {
   HandInference(PlayerGameView view) {
     this.view = view;
     cardCounter = new CardCounter(view.getAllCards());
-    for (CardPlaceholder card : view.getHand()) {
-      processCardDrawn(card);
-    }
+
+    // Remove all cards in other player's hands.
     try {
       for (Player player : view.getOtherPlayers()) {
         for (Card card : view.getPlayerHand(player)) {
-          processCardRevealed(card);
+          cardCounter.remove(card);
         }
       }
     } catch (Exception e) {
       // whatever
+    }
+
+    // Add inference for each card in our hand.
+    for (CardPlaceholder card : view.getHand()) {
+      addCardInference(card);
     }
   }
 
@@ -43,15 +47,16 @@ public class HandInference {
     }
   }
 
-  public void processCardRevealed(Card card) {
-    if (hand.containsKey(card)) {
-      hand.remove(card);
-    }
-    cardCounter.remove(card);
+  public void handleCardRevealed(Card card) {
+    cardCounter.remove(card, this);
   }
 
-  public void processCardDrawn(CardPlaceholder card) {
-    hand.put(card, new CardInference(cardCounter));
+  public void addCardInference(CardPlaceholder placeholder) {
+    hand.put(placeholder, new CardInference(cardCounter));
+  }
+
+  public void removeCardInference(CardPlaceholder placeholder) {
+    hand.remove(placeholder);
   }
 
   public boolean isGuaranteedPlayable(CardInference inference) {
