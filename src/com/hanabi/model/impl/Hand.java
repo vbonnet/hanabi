@@ -1,5 +1,6 @@
 package com.hanabi.model.impl;
 
+import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.player.PlayerHand;
 
@@ -12,7 +13,7 @@ public class Hand implements PlayerHand {
   final HashMap<CardPlaceholder, CardImpl> cards = new HashMap<>();
 
   @Override
-  public List<CardImpl> getCards() {
+  public List<Card> getCards() {
     return new ArrayList<>(cards.values());
   }
 

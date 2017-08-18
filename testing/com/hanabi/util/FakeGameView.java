@@ -7,11 +7,7 @@ import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
 import com.hanabi.model.impl.Deck;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,7 +16,7 @@ public class FakeGameView implements PlayerGameView {
   public List<Card> deck;
   public List<Card> discard;
 
-  public Map<Player, List<Card>> otherPlayers = new HashMap<>();
+  public LinkedHashMap<Player, List<Card>> otherPlayers = new LinkedHashMap<>();
   public Map<CardColor, Integer> playStacks;
 
   public FakeGameView() {
@@ -54,8 +50,8 @@ public class FakeGameView implements PlayerGameView {
   }
 
   @Override
-  public Collection<Player> getOtherPlayers() {
-    return otherPlayers.keySet();
+  public List<Player> getOtherPlayers() {
+    return new ArrayList<>(otherPlayers.keySet());
   }
 
   @Override
@@ -64,12 +60,12 @@ public class FakeGameView implements PlayerGameView {
   }
 
   @Override
-  public Collection<Card> getDiscard() {
+  public List<Card> getDiscard() {
     return discard;
   }
 
   @Override
-  public Collection<Card> getPlayerHand(Player player) throws Exception {
+  public List<Card> getPlayerHand(Player player) throws Exception {
     return otherPlayers.get(player);
   }
 
@@ -79,7 +75,7 @@ public class FakeGameView implements PlayerGameView {
   }
 
   @Override
-  public Collection<Card> getAllCards() {
+  public List<Card> getAllCards() {
     return Stream.of(
         deck.stream(),
         discard.stream(),

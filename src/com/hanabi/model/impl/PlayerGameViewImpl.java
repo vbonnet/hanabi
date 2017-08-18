@@ -34,12 +34,12 @@ public class PlayerGameViewImpl implements PlayerGameView {
   }
 
   @Override
-  public Collection<Card> getDiscard() {
+  public List<Card> getDiscard() {
     return new ArrayList<>(state.discard.getCards());
   }
 
   @Override
-  public Collection<Card> getPlayerHand(Player player) throws Exception {
+  public List<Card> getPlayerHand(Player player) throws Exception {
     if (player == this.player) {
       throw new Exception("No peeking!");
     }
@@ -52,12 +52,12 @@ public class PlayerGameViewImpl implements PlayerGameView {
   }
 
   @Override
-  public Collection<Card> getAllCards() {
+  public List<Card> getAllCards() {
     return new ArrayList<>(state.allCards);
   }
 
   @Override
-  public Collection<Player> getOtherPlayers() {
+  public List<Player> getOtherPlayers() {
     ArrayList<Player> players = new ArrayList(state.getPlayers());
     players.remove(player);
     return players;
