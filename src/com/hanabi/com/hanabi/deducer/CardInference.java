@@ -2,35 +2,35 @@ package com.hanabi.com.hanabi.deducer;
 
 import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.util.MapCounter;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CardInference implements  CardCounterListener {
-  private Collection<Card> possibleCards;
+  private MapCounter<Card> possibleCards = new MapCounter<>();
 
   CardInference(CardCounter cardCounter) {
-    this.possibleCards = cardCounter.getCards();
+    for (Card card : cardCounter.getCards()) {
+      possibleCards.increment(card);
+    }
     cardCounter.addListener(this);
   }
 
   public boolean isKnown() {
-    if (possibleCards.size() == 1) {
-      return true;
-    } else {
-      // It's possible we know exactly what the card is but that there's multiple copies
-      // of that card still ou there. We still know it though.
-      return getPossibleColors().size() == 1 && getPossibleNumbers().size() == 1;
-    }
+    return possibleCards.size() == 1;
   }
 
   public Collection<Card> getPossibleCards() {
-    return possibleCards;
+    return possibleCards.keySet();
   }
 
   public Set<CardColor> getPossibleColors() {
     return possibleCards
+        .keySet()
         .stream()
         .map(card -> card.getColor())
         .collect(Collectors.toSet());
@@ -38,6 +38,7 @@ public class CardInference implements  CardCounterListener {
 
   public Set<Integer> getPossibleNumbers() {
     return possibleCards
+        .keySet()
         .stream()
         .map(card -> card.getNumber())
         .collect(Collectors.toSet());
@@ -57,7 +58,6 @@ public class CardInference implements  CardCounterListener {
 
   public void removeNumber(Integer number) {
     possibleCards.removeIf(card -> card.getNumber() == number);
-
   }
 
   public void setValue(Object object ) {
@@ -78,6 +78,6 @@ public class CardInference implements  CardCounterListener {
 
   @Override
   public void handleCardRemoved(Card card) {
-    possibleCards.remove(card);
+    possibleCards.decrement(card);
   }
 }
