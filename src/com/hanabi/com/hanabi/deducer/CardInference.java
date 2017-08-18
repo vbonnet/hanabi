@@ -12,8 +12,10 @@ import java.util.stream.Collectors;
 
 public class CardInference implements  CardCounterListener {
   private MapCounter<Card> possibleCards = new MapCounter<>();
+  private CardCounter cardCounter;
 
   CardInference(CardCounter cardCounter) {
+    this.cardCounter = cardCounter;
     for (Card card : cardCounter.getCards()) {
       possibleCards.increment(card);
     }
@@ -46,18 +48,22 @@ public class CardInference implements  CardCounterListener {
 
   public void setColor(CardColor color) {
     possibleCards.removeIf(card -> card.getColor() != color);
+    updateInference();
   }
 
   public void removeColor(CardColor color) {
     possibleCards.removeIf(card -> card.getColor() == color);
+    updateInference();
   }
 
   public void setNumber(Integer number) {
     possibleCards.removeIf(card -> card.getNumber() != number);
+    updateInference();
   }
 
   public void removeNumber(Integer number) {
     possibleCards.removeIf(card -> card.getNumber() == number);
+    updateInference();
   }
 
   public void setValue(Object object ) {
@@ -73,6 +79,13 @@ public class CardInference implements  CardCounterListener {
       removeColor((CardColor)object);
     } else if (object instanceof Integer) {
       removeNumber((Integer)object);
+    }
+  }
+
+  private void updateInference() {
+    if (possibleCards.keySet().size() == 1) {
+      Card card = possibleCards.keySet().iterator().next();
+      cardCounter.remove(card, this);
     }
   }
 

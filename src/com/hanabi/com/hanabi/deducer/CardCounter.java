@@ -17,9 +17,16 @@ public class CardCounter {
   }
 
   public void remove(Card card) {
-    remainingCards.remove(card);
-    for (CardCounterListener listener : listeners) {
-      listener.handleCardRemoved(card);
+    remove(card, null);
+  }
+
+  public void remove(Card card, Object caller) {
+    if (remainingCards.remove(card)) {
+      for (CardCounterListener listener : listeners) {
+        if (listener != caller) {
+          listener.handleCardRemoved(card);
+        }
+      }
     }
   }
 
