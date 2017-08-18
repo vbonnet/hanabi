@@ -26,4 +26,21 @@ public class CardImpl implements Card {
   public String toString() {
     return "(" + value + ", " + color.toString() + ")";
   }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (obj instanceof Card) {
+      Card otherCard = (Card)obj;
+      return (
+          otherCard.getColor() == this.getColor() &&
+          otherCard.getNumber() == this.getNumber());
+    } else {
+      return false;
+    }
+  }
+
+  @Override
+  public int hashCode() {
+    return this.toString().hashCode();
+  }
 }
