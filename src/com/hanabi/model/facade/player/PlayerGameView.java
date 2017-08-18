@@ -1,7 +1,7 @@
 package com.hanabi.model.facade.player;
 
 import com.hanabi.model.facade.card.CardPlaceholder;
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
 
 import java.util.Collection;
@@ -20,5 +20,5 @@ public interface PlayerGameView {
 
   Collection<Player> getOtherPlayers();
 
-  Map<Color, Integer> getPlayStacks();
+  Map<CardColor, Integer> getPlayStacks();
 }

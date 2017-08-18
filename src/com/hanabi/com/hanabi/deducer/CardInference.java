@@ -1,6 +1,6 @@
 package com.hanabi.com.hanabi.deducer;
 
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
 
 import java.util.Collection;
@@ -29,7 +29,7 @@ public class CardInference implements  CardCounterListener {
     return possibleCards;
   }
 
-  public Set<Color> getPossibleColors() {
+  public Set<CardColor> getPossibleColors() {
     return possibleCards
         .stream()
         .map(card -> card.getColor())
@@ -43,11 +43,11 @@ public class CardInference implements  CardCounterListener {
         .collect(Collectors.toSet());
   }
 
-  public void setColor(Color color) {
+  public void setColor(CardColor color) {
     possibleCards.removeIf(card -> card.getColor() != color);
   }
 
-  public void removeColor(Color color) {
+  public void removeColor(CardColor color) {
     possibleCards.removeIf(card -> card.getColor() == color);
   }
 
@@ -61,16 +61,16 @@ public class CardInference implements  CardCounterListener {
   }
 
   public void setValue(Object object ) {
-    if (object instanceof Color) {
-      setColor((Color)object);
+    if (object instanceof CardColor) {
+      setColor((CardColor)object);
     } else if (object instanceof Integer) {
       setNumber((Integer)object);
     }
   }
 
   public void removeValue(Object object) {
-    if (object instanceof Color) {
-      removeColor((Color)object);
+    if (object instanceof CardColor) {
+      removeColor((CardColor)object);
     } else if (object instanceof Integer) {
       removeNumber((Integer)object);
     }

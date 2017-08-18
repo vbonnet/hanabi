@@ -1,6 +1,6 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class Deck {
 
   public static List<CardImpl> fullCardList() {
     ArrayList<CardImpl> cardList = new ArrayList<>();
-    for (Color color : Color.values()) {
+    for (CardColor color : CardColor.values()) {
       cardList.add(new CardImpl(1, color));
       cardList.add(new CardImpl(1, color));
       cardList.add(new CardImpl(1, color));

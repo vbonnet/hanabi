@@ -1,6 +1,6 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ class DiscardPile {
     cards.add(card);
   }
 
-  protected List<CardImpl> getCardByColor(Color color) {
+  protected List<CardImpl> getCardByColor(CardColor color) {
     return cards.stream().filter(card -> card.getColor() == color).collect(Collectors.toList());
   }
 

@@ -1,6 +1,6 @@
 package com.hanabi.com.hanabi.deducer;
 
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.util.FakeGameView;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,7 +27,7 @@ public class HandInferenceTest {
         handInference.isGuaranteedPlayable(cardInference));
 
     // Play the red one
-    view.playStacks.put(Color.RED, 1);
+    view.playStacks.put(CardColor.RED, 1);
 
     // Now not all one's are playable
     cardInference = new CardInference(handInference.cardCounter);
@@ -38,7 +38,7 @@ public class HandInferenceTest {
     // All but the red one should be playable
     cardInference = new CardInference(handInference.cardCounter);
     cardInference.setValue(1);
-    cardInference.removeColor(Color.RED);
+    cardInference.removeColor(CardColor.RED);
     Assert.assertTrue(
         handInference.isGuaranteedPlayable(cardInference));
 
@@ -52,7 +52,7 @@ public class HandInferenceTest {
     // Red two should be playable
     cardInference = new CardInference(handInference.cardCounter);
     cardInference.setValue(2);
-    cardInference.setColor(Color.RED);
+    cardInference.setColor(CardColor.RED);
     Assert.assertTrue(
         handInference.isGuaranteedPlayable(cardInference));
   }
@@ -69,7 +69,7 @@ public class HandInferenceTest {
     Assert.assertFalse(
         handInference.isAlreadyPlayed(inference));
 
-    for (Color color : Color.values()) {
+    for (CardColor color : CardColor.values()) {
       view.playStacks.put(color, 2);
     }
 
@@ -94,12 +94,12 @@ public class HandInferenceTest {
         handInference.isAlreadyPlayed(inference));
 
     // Play red three
-    view.playStacks.put(Color.RED, 3);
+    view.playStacks.put(CardColor.RED, 3);
 
     // Red three is played
     inference = new CardInference(handInference.cardCounter);
     inference.setValue(3);
-    inference.setColor(Color.RED);
+    inference.setColor(CardColor.RED);
     Assert.assertTrue(
         handInference.isAlreadyPlayed(inference));
 

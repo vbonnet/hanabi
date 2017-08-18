@@ -1,19 +1,19 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
 
 public class CardImpl implements Card {
   private final int value;
-  private final Color color;
+  private final CardColor color;
 
-  CardImpl(int value, Color color) {
+  CardImpl(int value, CardColor color) {
     this.value = value;
     this.color = color;
   }
 
   @Override
-  public Color getColor() {
+  public CardColor getColor() {
     return color;
   }
 

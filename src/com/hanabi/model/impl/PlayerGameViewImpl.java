@@ -1,7 +1,7 @@
 package com.hanabi.model.impl;
 
 import com.hanabi.model.facade.card.CardPlaceholder;
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
@@ -64,7 +64,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
   }
 
   @Override
-  public Map<Color, Integer> getPlayStacks() {
+  public Map<CardColor, Integer> getPlayStacks() {
     return new HashMap<>(state.board.stacks);
   }
 }

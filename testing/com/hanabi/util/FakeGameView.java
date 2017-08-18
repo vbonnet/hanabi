@@ -1,7 +1,7 @@
 package com.hanabi.util;
 
 import com.hanabi.model.facade.card.CardPlaceholder;
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
@@ -21,7 +21,7 @@ public class FakeGameView implements PlayerGameView {
   public List<Card> discard;
 
   public Map<Player, List<Card>> otherPlayers = new HashMap<>();
-  public Map<Color, Integer> playStacks;
+  public Map<CardColor, Integer> playStacks;
 
   public FakeGameView() {
     this(new HashMap<>(), new ArrayList<>(Deck.fullCardList()), new ArrayList<>());
@@ -32,7 +32,7 @@ public class FakeGameView implements PlayerGameView {
       List<Card> deck,
       List<Card> discard) {
     this(hand, deck, discard, new HashMap<>());
-    for (Color color : Color.values()) {
+    for (CardColor color : CardColor.values()) {
       playStacks.put(color, 0);
     }
   }
@@ -41,7 +41,7 @@ public class FakeGameView implements PlayerGameView {
         Map<CardPlaceholder, Card> hand,
         List<Card> deck,
         List<Card> discard,
-        Map<Color, Integer> playStacks) {
+        Map<CardColor, Integer> playStacks) {
     this.hand = hand;
     this.deck = deck;
     this.discard = discard;
@@ -49,7 +49,7 @@ public class FakeGameView implements PlayerGameView {
   }
 
   @Override
-  public Map<Color, Integer> getPlayStacks() {
+  public Map<CardColor, Integer> getPlayStacks() {
     return playStacks;
   }
 

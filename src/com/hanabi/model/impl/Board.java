@@ -1,16 +1,16 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 
 import java.util.HashMap;
 import java.util.Map;
 
 class Board {
-   final Map<Color, Integer> stacks;
+   final Map<CardColor, Integer> stacks;
 
   Board() {
     stacks = new HashMap<>();
-    for (Color color : Color.values()) {
+    for (CardColor color : CardColor.values()) {
       stacks.put(color, 0);
     }
   }
@@ -39,7 +39,7 @@ class Board {
   @Override
   public String toString() {
     StringBuilder s = new StringBuilder();
-    for (Map.Entry<Color, Integer> entry : stacks.entrySet()) {
+    for (Map.Entry<CardColor, Integer> entry : stacks.entrySet()) {
       s.append(entry.getKey()).append(": ").append(entry.getValue()).append("\n");
     }
     return s.toString();

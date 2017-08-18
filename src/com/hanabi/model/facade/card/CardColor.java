@@ -1,6 +1,6 @@
 package com.hanabi.model.facade.card;
 
-public enum Color {
+public enum CardColor {
   BLUE,
   GREEN,
   RED,

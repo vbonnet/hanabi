@@ -1,15 +1,15 @@
 package com.hanabi.model.facade.clue;
 
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 
 public class ColorClue implements Clue {
-  private final Color color;
+  private final CardColor color;
 
-  public ColorClue(Color color) {
+  public ColorClue(CardColor color) {
     this.color = color;
   }
 
-  public Color getColor() {
+  public CardColor getColor() {
     return color;
   }
 }

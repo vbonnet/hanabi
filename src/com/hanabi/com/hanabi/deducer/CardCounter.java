@@ -1,6 +1,6 @@
 package com.hanabi.com.hanabi.deducer;
 
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ public class CardCounter {
     return new ArrayList<>(remainingCards);
   }
 
-  public Collection<Card> getCardsByColor(Color color) {
+  public Collection<Card> getCardsByColor(CardColor color) {
     return remainingCards
         .stream()
         .filter(c -> c.getColor() == color)
@@ -41,7 +41,7 @@ public class CardCounter {
         .collect(Collectors.toList());
   }
 
-  public Collection<Card> getCardsByColorAndNumber(Color color, Integer number) {
+  public Collection<Card> getCardsByColorAndNumber(CardColor color, Integer number) {
     return remainingCards
         .stream()
         .filter(c -> c.getColor() == color && c.getNumber() == number)

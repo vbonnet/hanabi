@@ -1,7 +1,7 @@
 package com.hanabi.com.hanabi.deducer;
 
 import com.hanabi.model.facade.card.CardPlaceholder;
-import com.hanabi.model.facade.card.Color;
+import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerClue;
@@ -55,7 +55,7 @@ public class HandInference {
   }
 
   public boolean isGuaranteedPlayable(CardInference inference) {
-    Map<Color, Integer> stacks = view.getPlayStacks();
+    Map<CardColor, Integer> stacks = view.getPlayStacks();
     for (Card card : inference.getPossibleCards()) {
       if (card.getNumber() != stacks.get(card.getColor()) + 1) {
         return false;
@@ -65,7 +65,7 @@ public class HandInference {
   }
 
   public boolean isAlreadyPlayed(CardInference inference) {
-    Map<Color, Integer> stacks = view.getPlayStacks();
+    Map<CardColor, Integer> stacks = view.getPlayStacks();
     for (Card card : inference.getPossibleCards()) {
       if (card.getNumber() > stacks.get(card.getColor())) {
         return false;
