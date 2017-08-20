@@ -39,14 +39,16 @@ public class GameEngine {
     return state;
   }
 
-  public int run() throws Exception {
+  public void initialize() {
     for (Player player : players) {
       PlayerGameView view = new PlayerGameViewImpl(state, player);
       player.initializeWithView(view);
       player.initializeWithHand(
           new ArrayList<>(state.getPlayerHand(player).getPlaceholders()));
     }
+  }
 
+  public int run() throws Exception {
     Player currentPlayer = null;
     Player nextPlayer = players.get(0);
 

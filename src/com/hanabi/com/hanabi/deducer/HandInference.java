@@ -13,11 +13,15 @@ import java.util.Map;
 public class HandInference {
   final PlayerGameView view;
   final CardCounter cardCounter;
-  final Map<CardPlaceholder, CardInference> hand = new HashMap<>();
+  public final Map<CardPlaceholder, CardInference> hand = new HashMap<>();
 
-  HandInference(PlayerGameView view) {
+  public HandInference(PlayerGameView view) {
+    this(view, new CardCounter(view.getAllCards()));
+  }
+
+  public HandInference(PlayerGameView view, CardCounter counter) {
     this.view = view;
-    cardCounter = new CardCounter(view.getAllCards());
+    this.cardCounter = counter;
 
     // Remove all cards in other player's hands.
     try {

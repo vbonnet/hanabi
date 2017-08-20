@@ -17,11 +17,11 @@ public class Hand implements PlayerHand {
     return new ArrayList<>(cards.values());
   }
 
-  Collection<CardPlaceholder> getPlaceholders() {
+  public Collection<CardPlaceholder> getPlaceholders() {
     return cards.keySet();
   }
 
-  CardImpl getCard(CardPlaceholder placeholder) {
+  public CardImpl getCard(CardPlaceholder placeholder) {
     return cards.get(placeholder);
   }
 

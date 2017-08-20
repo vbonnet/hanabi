@@ -12,7 +12,7 @@ public class CardCounter {
   Collection<Card> remainingCards;
   final HashSet<CardCounterListener> listeners = new HashSet<>();
 
-  CardCounter(Collection<Card> cards) {
+  public CardCounter(Collection<Card> cards) {
     this.remainingCards = cards;
   }
 

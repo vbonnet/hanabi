@@ -12,7 +12,7 @@ public class CardInference implements  CardCounterListener {
   private MapCounter<Card> possibleCards = new MapCounter<>();
   private CardCounter cardCounter;
 
-  CardInference(CardCounter cardCounter) {
+  public CardInference(CardCounter cardCounter) {
     this.cardCounter = cardCounter;
     for (Card card : cardCounter.getCards()) {
       possibleCards.increment(card);

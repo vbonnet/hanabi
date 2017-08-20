@@ -53,7 +53,7 @@ public class GameState {
     return hands.keySet();
   }
 
-  Hand getPlayerHand(Player player) {
+  public Hand getPlayerHand(Player player) {
     return hands.get(player);
   }
 
