@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 
@@ -59,6 +60,7 @@ public class HanabiViewer extends Application {
     root.setRight(drawPlayerHandWithInference(players.get(1), Cardinal.RIGHT));
     root.setTop(drawPlayerHandWithInference(players.get(2), Cardinal.TOP));
     root.setBottom(drawPlayerHandWithInference(players.get(3), Cardinal.BOTTOM));
+    root.setCenter(drawBoard());
 
     primaryStage.setScene(new Scene(root, 700, 800));
     primaryStage.show();
@@ -67,12 +69,24 @@ public class HanabiViewer extends Application {
   private Pane drawPlayerHandWithInference(HumanPlayer player, Cardinal cardinal) {
     List<Pair<Card, CardInference>> hand = new ArrayList<>();
     Hand playerHand = engine.getState().getPlayerHand(player);
-    for (CardPlaceholder placeholder : playerHand.getPlaceholders()) {
+      for (CardPlaceholder placeholder : playerHand.getPlaceholders()) {
       hand.add(new Pair<>(
-          playerHand.getCard(placeholder),
+          engine.getState().getPlayerHand(player).getCard(placeholder),
           player.handInference.hand.get(placeholder)));
     }
+    return drawCardListWithInferences(hand, cardinal);
+  }
 
+  private Pane drawCardList(List<Card> cards, Cardinal cardinal) {
+    return drawCardListWithInferences(
+        cards
+            .stream()
+            .map(c -> new Pair<Card, CardInference>(c, null))
+            .collect(Collectors.toList()),
+        cardinal);
+  }
+
+  private Pane drawCardListWithInferences(List<Pair<Card, CardInference>> hand, Cardinal cardinal) {
     Pane box = orientedHorizontalBox(cardinal, 20);
 
     addSpacer(box);
@@ -127,7 +141,10 @@ public class HanabiViewer extends Application {
     // Show the real value of the card
     Pane valuePane = orientedVerticalBox(cardinal, spacing);
     addSpacer(valuePane);
-    addCardLabel(valuePane, card, cardinal);
+    if (card.getNumber() != 0) {
+      addCardLabel(valuePane, card, cardinal);
+    }
+
     addSpacer(valuePane);
     box.getChildren().add(valuePane);
 
@@ -154,6 +171,7 @@ public class HanabiViewer extends Application {
 
   private Pane drawBoard() {
     TilePane pane = new TilePane();
+
     return pane;
   }
 
