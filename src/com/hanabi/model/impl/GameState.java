@@ -1,5 +1,6 @@
 package com.hanabi.model.impl;
 
+import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.player.Player;
 
@@ -71,6 +72,10 @@ public class GameState {
 
   public int getNumberCardsInDeck() {
     return deck.getNumberCards();
+  }
+
+  public HashMap<CardColor, Integer> getCardStacks() {
+    return new HashMap<>(board.stacks);
   }
 
   private Deck getDeck() {
