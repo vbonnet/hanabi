@@ -1,8 +1,6 @@
 package com.hanabi.ui.viewer;
 
-import com.hanabi.com.hanabi.deducer.CardCounter;
-import com.hanabi.com.hanabi.deducer.HandInference;
-import com.hanabi.model.facade.action.DiscardAction;
+import com.hanabi.inference.HandInference;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.CardPlaceholder;

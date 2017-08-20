@@ -1,10 +1,9 @@
 package com.hanabi.ui.viewer;
 
-import com.hanabi.com.hanabi.deducer.CardInference;
+import com.hanabi.inference.CardInference;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.CardPlaceholder;
-import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.impl.GameEngine;
 import com.hanabi.model.impl.Hand;
 import javafx.application.Application;

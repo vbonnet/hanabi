@@ -1,4 +1,4 @@
-package com.hanabi.com.hanabi.deducer;
+package com.hanabi.inference;
 
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.card.CardColor;
