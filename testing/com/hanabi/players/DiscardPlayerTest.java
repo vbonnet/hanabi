@@ -25,7 +25,7 @@ public class DiscardPlayerTest {
         state.getNumberOfLives(),
         3);
     Assert.assertEquals(
-        state.getDeck().getNumberCards(),
+        state.getNumberCardsInDeck(),
         0);
   }
 }

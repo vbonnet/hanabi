@@ -69,7 +69,11 @@ public class GameState {
     return clues;
   }
 
-  public Deck getDeck() {
+  public int getNumberCardsInDeck() {
+    return deck.getNumberCards();
+  }
+
+  private Deck getDeck() {
     return deck;
   }
 

@@ -152,6 +152,11 @@ public class HanabiViewer extends Application {
     return box;
   }
 
+  private Pane drawBoard() {
+    TilePane pane = new TilePane();
+    return pane;
+  }
+
   private void rotate(Label pane, Cardinal cardinal) {
     switch (cardinal) {
       case LEFT:

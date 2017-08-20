@@ -20,7 +20,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
 
   @Override
   public int getSizeOfDeck() {
-    return state.getDeck().getNumberCards();
+    return state.getNumberCardsInDeck();
   }
 
   @Override
