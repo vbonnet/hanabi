@@ -62,7 +62,7 @@ public class HanabiViewer extends Application {
     root.setBottom(drawPlayerHandWithInference(players.get(3), Cardinal.BOTTOM));
     root.setCenter(drawBoard());
 
-    primaryStage.setScene(new Scene(root, 700, 800));
+    primaryStage.setScene(new Scene(root, 900, 800));
     primaryStage.show();
   }
 
@@ -77,7 +77,7 @@ public class HanabiViewer extends Application {
     return drawCardListWithInferences(hand, cardinal);
   }
 
-  private Pane drawCardList(List<Card> cards, Cardinal cardinal) {
+  private Pane drawCardList(Collection<Card> cards, Cardinal cardinal) {
     return drawCardListWithInferences(
         cards
             .stream()
@@ -86,7 +86,7 @@ public class HanabiViewer extends Application {
         cardinal);
   }
 
-  private Pane drawCardListWithInferences(List<Pair<Card, CardInference>> hand, Cardinal cardinal) {
+  private Pane drawCardListWithInferences(Collection<Pair<Card, CardInference>> hand, Cardinal cardinal) {
     Pane box = orientedHorizontalBox(cardinal, 20);
 
     addSpacer(box);
@@ -171,7 +171,11 @@ public class HanabiViewer extends Application {
 
   private Pane drawBoard() {
     TilePane pane = new TilePane();
-
+    addSpacer(pane);
+    pane.getChildren().add(
+        drawCardList(engine.getState().getCardStacks().values(), Cardinal.TOP));
+    addSpacer(pane);
+    pane.setAlignment(Pos.CENTER);
     return pane;
   }
 
