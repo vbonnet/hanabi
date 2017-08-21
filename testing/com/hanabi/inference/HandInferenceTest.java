@@ -1,5 +1,6 @@
 package com.hanabi.inference;
 
+import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.util.FakeGameView;
 import org.junit.Assert;
@@ -8,6 +9,19 @@ import org.junit.Test;
 
 public class HandInferenceTest {
 
+  private void playCard(FakeGameView view, CardColor color, Integer number) {
+    view.playStacks.put(color, new Card() {
+      @Override
+      public CardColor getColor() {
+        return color;
+      }
+
+      @Override
+      public int getNumber() {
+        return number;
+      }
+    });
+  }
   @Test
   public void testPlayable() {
     FakeGameView view = new FakeGameView();
@@ -26,8 +40,8 @@ public class HandInferenceTest {
     Assert.assertTrue(
         handInference.isGuaranteedPlayable(cardInference));
 
-    // Play the red one
-    view.playStacks.put(CardColor.RED, 1);
+    // Play the red 1
+    playCard(view, CardColor.RED, 1);
 
     // Now not all one's are playable
     cardInference = new CardInference(handInference.cardCounter);
@@ -70,7 +84,7 @@ public class HandInferenceTest {
         handInference.isAlreadyPlayed(inference));
 
     for (CardColor color : CardColor.values()) {
-      view.playStacks.put(color, 2);
+      playCard(view, color, 2);
     }
 
     // One's are played
@@ -94,7 +108,7 @@ public class HandInferenceTest {
         handInference.isAlreadyPlayed(inference));
 
     // Play red three
-    view.playStacks.put(CardColor.RED, 3);
+    playCard(view, CardColor.RED, 3);
 
     // Red three is played
     inference = new CardInference(handInference.cardCounter);

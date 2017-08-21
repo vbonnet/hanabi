@@ -19,5 +19,5 @@ public interface PlayerGameView {
 
   List<Player> getOtherPlayers();
 
-  Map<CardColor, Integer> getPlayStacks();
+  Map<CardColor, Card> getPlayStacks();
 }

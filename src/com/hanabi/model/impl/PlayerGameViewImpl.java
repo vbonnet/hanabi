@@ -64,7 +64,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
   }
 
   @Override
-  public Map<CardColor, Integer> getPlayStacks() {
+  public Map<CardColor, Card> getPlayStacks() {
     return state.getCardStacks();
   }
 }

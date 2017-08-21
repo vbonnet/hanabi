@@ -64,9 +64,8 @@ public class HandInference {
   }
 
   public boolean isGuaranteedPlayable(CardInference inference) {
-    Map<CardColor, Integer> stacks = view.getPlayStacks();
     for (Card card : inference.getPossibleCards()) {
-      if (card.getNumber() != stacks.get(card.getColor()) + 1) {
+      if (card.getNumber() != valueOfStack(card.getColor()) + 1) {
         return false;
       }
     }
@@ -74,12 +73,16 @@ public class HandInference {
   }
 
   public boolean isAlreadyPlayed(CardInference inference) {
-    Map<CardColor, Integer> stacks = view.getPlayStacks();
     for (Card card : inference.getPossibleCards()) {
-      if (card.getNumber() > stacks.get(card.getColor())) {
+      if (card.getNumber() > valueOfStack(card.getColor())) {
         return false;
       }
     }
     return true;
+  }
+
+  private int valueOfStack(CardColor color) {
+    Card card = view.getPlayStacks().get(color);
+    return card == null ? 0 : card.getNumber();
   }
 }

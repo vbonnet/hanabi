@@ -17,7 +17,7 @@ public class FakeGameView implements PlayerGameView {
   public List<Card> discard;
 
   public LinkedHashMap<Player, List<Card>> otherPlayers = new LinkedHashMap<>();
-  public Map<CardColor, Integer> playStacks;
+  public Map<CardColor, Card> playStacks;
 
   public FakeGameView() {
     this(new HashMap<>(), new ArrayList<>(Deck.fullCardList()), new ArrayList<>());
@@ -29,7 +29,7 @@ public class FakeGameView implements PlayerGameView {
       List<Card> discard) {
     this(hand, deck, discard, new HashMap<>());
     for (CardColor color : CardColor.values()) {
-      playStacks.put(color, 0);
+      playStacks.put(color, null);
     }
   }
 
@@ -37,7 +37,7 @@ public class FakeGameView implements PlayerGameView {
         Map<CardPlaceholder, Card> hand,
         List<Card> deck,
         List<Card> discard,
-        Map<CardColor, Integer> playStacks) {
+        Map<CardColor, Card> playStacks) {
     this.hand = hand;
     this.deck = deck;
     this.discard = discard;
@@ -45,7 +45,7 @@ public class FakeGameView implements PlayerGameView {
   }
 
   @Override
-  public Map<CardColor, Integer> getPlayStacks() {
+  public Map<CardColor, Card> getPlayStacks() {
     return playStacks;
   }
 
