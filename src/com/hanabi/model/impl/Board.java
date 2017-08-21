@@ -12,20 +12,20 @@ class Board {
   Board() {
     stacks = new HashMap<>();
     for (CardColor color : CardColor.values()) {
-      stacks.put(color, null);
+      stacks.put(color, new CardImpl(0, color));
     }
   }
 
   int getScore() {
     int score = 0;
     for (Card card : stacks.values()) {
-      score += card == null ? 0 : card.getNumber();
+      score += getStackValue(card.getColor());
     }
     return score;
   }
 
   boolean canPlayCard(CardImpl card) {
-    Integer currentValue = stacks.get(card.getColor()).getNumber();
+    Integer currentValue = getStackValue(card.getColor());
     return card.getNumber() == currentValue + 1;
   }
 
@@ -35,6 +35,10 @@ class Board {
     } else {
       throw new Exception("Cannot play that card");
     }
+  }
+
+  private int getStackValue(CardColor color) {
+    return stacks.get(color).getNumber();
   }
 
   @Override

@@ -17,6 +17,7 @@ public class DiscardPlayerTest {
     players.add(new DiscardPlayer());
     GameEngine engine = new GameEngine(players);
     GameState state = engine.getState();
+    engine.initialize();
     engine.run();
 
     Assert.assertTrue(

@@ -17,6 +17,7 @@ public class PlayFirstPlayerTest {
     players.add(new PlayFirstPlayer());
     GameEngine engine = new GameEngine(players);
     GameState state = engine.getState();
+    engine.initialize();
     engine.run();
 
     Assert.assertTrue(state.isGameOver());
