@@ -18,7 +18,7 @@ public class CardImpl implements Card {
   }
 
   @Override
-  public int getNumber() {
+  public Integer getNumber() {
     return value;
   }
 

@@ -4,6 +4,7 @@ import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.GiveClueAction;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
+import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.clue.Clue;
 import com.hanabi.model.facade.clue.ClueType;
@@ -115,29 +116,13 @@ public class GameEngine {
   }
 
   private PlayerClue makePlayerClue(Hand hand, Clue clue) {
-    if (clue instanceof ColorClue) {
-      ColorClue colorClue = (ColorClue)clue;
-      List<CardPlaceholder> matchingCards = hand
-          .cards
-          .entrySet()
-          .stream()
-          .filter(entry -> entry.getValue().getColor() == colorClue.getColor())
-          .map(Map.Entry::getKey)
-          .collect(Collectors.toList());
-      return new PlayerClue(ClueType.COLOR, matchingCards, colorClue.getColor());
-    } else if (clue instanceof NumberClue) {
-      NumberClue numberClue = (NumberClue)clue;
-      List<CardPlaceholder> matchingCards = hand
-          .cards
-          .entrySet()
-          .stream()
-          .filter(entry -> entry.getValue().getNumber() == numberClue.getNumber())
-          .map(Map.Entry::getKey)
-          .collect(Collectors.toList());
-      return new PlayerClue(ClueType.NUMBER, matchingCards, numberClue.getNumber());
-    } else {
-      return null;
+    PlayerClue playerClue = new PlayerClue(clue);
+    for (Map.Entry<CardPlaceholder, CardImpl> entry : hand.cards.entrySet()) {
+      if (playerClue.cardMatches(entry.getValue())) {
+        playerClue.addPlaceholder(entry.getKey());
+      }
     }
+    return playerClue;
   }
 
   private void playCard(Player player, CardPlaceholder placeholder) throws Exception {

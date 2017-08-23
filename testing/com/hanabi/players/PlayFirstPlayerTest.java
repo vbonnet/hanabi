@@ -15,6 +15,8 @@ public class PlayFirstPlayerTest {
     ArrayList<Player> players = new ArrayList<>();
     players.add(new PlayFirstPlayer());
     players.add(new PlayFirstPlayer());
+    players.add(new PlayFirstPlayer());
+    players.add(new PlayFirstPlayer());
     GameEngine engine = new GameEngine(players);
     GameState state = engine.getState();
     engine.initialize();

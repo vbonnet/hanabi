@@ -15,6 +15,8 @@ public class DiscardPlayerTest {
     ArrayList<Player> players = new ArrayList<>();
     players.add(new DiscardPlayer());
     players.add(new DiscardPlayer());
+    players.add(new DiscardPlayer());
+    players.add(new DiscardPlayer());
     GameEngine engine = new GameEngine(players);
     GameState state = engine.getState();
     engine.initialize();

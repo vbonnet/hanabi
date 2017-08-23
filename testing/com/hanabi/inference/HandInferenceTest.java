@@ -17,7 +17,7 @@ public class HandInferenceTest {
       }
 
       @Override
-      public int getNumber() {
+      public Integer getNumber() {
         return number;
       }
     });
