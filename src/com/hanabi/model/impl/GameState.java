@@ -10,7 +10,7 @@ import java.util.*;
 public class GameState {
   private final Map<Player, Hand> hands = new HashMap<>();
   final DiscardPile discard = new DiscardPile();
-  final Collection<CardImpl> allCards;
+  final List<Card> allCards;
   final Board board = new Board();
   private final Deck deck;
 
@@ -23,7 +23,7 @@ public class GameState {
       Collections.shuffle(cardList);
     }
     deck = new Deck(cardList);
-    allCards = cardList;
+    allCards = Collections.unmodifiableList(cardList);
 
     int numberOfPlayers = playerList.size();
     int cardsPerPlayer;

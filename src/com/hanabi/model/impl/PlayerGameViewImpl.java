@@ -1,12 +1,16 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.card.CardPlaceholder;
-import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.CardColor;
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerGameView;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
 
 public class PlayerGameViewImpl implements PlayerGameView {
 
@@ -35,7 +39,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
 
   @Override
   public List<Card> getDiscard() {
-    return new ArrayList<>(state.discard.getCards());
+    return Collections.unmodifiableList(state.discard.getCards());
   }
 
   @Override
@@ -43,7 +47,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
     if (player == this.player) {
       throw new Exception("No peeking!");
     }
-    return new ArrayList<>(state.getPlayerHand(player).getCards());
+    return Collections.unmodifiableList(state.getPlayerHand(player).getCards());
   }
 
   @Override
@@ -53,7 +57,7 @@ public class PlayerGameViewImpl implements PlayerGameView {
 
   @Override
   public List<Card> getAllCards() {
-    return new ArrayList<>(state.allCards);
+    return state.allCards;
   }
 
   @Override
@@ -65,6 +69,6 @@ public class PlayerGameViewImpl implements PlayerGameView {
 
   @Override
   public Map<CardColor, Card> getPlayStacks() {
-    return state.getCardStacks();
+    return Collections.unmodifiableMap(state.getCardStacks());
   }
 }

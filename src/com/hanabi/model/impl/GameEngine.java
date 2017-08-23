@@ -4,20 +4,16 @@ import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.GiveClueAction;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
-import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.clue.Clue;
-import com.hanabi.model.facade.clue.ClueType;
-import com.hanabi.model.facade.clue.ColorClue;
-import com.hanabi.model.facade.clue.NumberClue;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerClue;
 import com.hanabi.model.facade.player.PlayerGameView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class GameEngine {
 
@@ -33,7 +29,7 @@ public class GameEngine {
     }
 
     state = new GameState(players, null);
-    this.players = players;
+    this.players = Collections.unmodifiableList(players);
   }
 
   public GameState getState() {

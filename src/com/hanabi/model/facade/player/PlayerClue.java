@@ -8,7 +8,6 @@ import com.hanabi.model.facade.clue.ColorClue;
 import com.hanabi.model.facade.clue.NumberClue;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class PlayerClue {

@@ -1,8 +1,8 @@
 package com.hanabi.inference;
 
-import com.hanabi.model.facade.card.CardPlaceholder;
-import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.CardColor;
+import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.player.Player;
 import com.hanabi.model.facade.player.PlayerClue;
 import com.hanabi.model.facade.player.PlayerGameView;

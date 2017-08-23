@@ -1,7 +1,7 @@
 package com.hanabi.inference;
 
-import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.model.facade.card.Card;
+import com.hanabi.model.facade.card.CardColor;
 
 import java.util.ArrayList;
 import java.util.Collection;

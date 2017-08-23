@@ -5,19 +5,19 @@ import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.player.PlayerHand;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 public class Hand implements PlayerHand {
-  final HashMap<CardPlaceholder, CardImpl> cards = new HashMap<>();
+  final LinkedHashMap<CardPlaceholder, CardImpl> cards = new LinkedHashMap<>();
 
   @Override
   public List<Card> getCards() {
     return new ArrayList<>(cards.values());
   }
 
-  public Collection<CardPlaceholder> getPlaceholders() {
+  public Set<CardPlaceholder> getPlaceholders() {
     return cards.keySet();
   }
 
