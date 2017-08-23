@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerClue {
+  public final List<CardPlaceholder> cards = new ArrayList<>();
   public ClueType type;
   public Object value;
-  public final List<CardPlaceholder> cards = new ArrayList<>();
 
   public PlayerClue(Clue clue) {
     if (clue instanceof ColorClue) {
@@ -21,7 +21,7 @@ public class PlayerClue {
       this.type = ClueType.COLOR;
       this.value = colorClue.getColor();
     } else if (clue instanceof NumberClue) {
-      NumberClue numberClue = (NumberClue)clue;
+      NumberClue numberClue = (NumberClue) clue;
       this.type = ClueType.NUMBER;
       this.value = numberClue.getNumber();
     }

@@ -15,7 +15,8 @@ public class DiscardPlayer implements Player {
   private List<CardPlaceholder> myCards;
 
   @Override
-  public void initializeWithView(PlayerGameView view) {}
+  public void initializeWithView(PlayerGameView view) {
+  }
 
   @Override
   public void initializeWithHand(List<CardPlaceholder> cards) {
@@ -33,14 +34,18 @@ public class DiscardPlayer implements Player {
   }
 
   @Override
-  public void handlePlayerTakingAction(PlayerAction action) {}
+  public void handlePlayerTakingAction(PlayerAction action) {
+  }
 
   @Override
-  public void handleClue(PlayerClue clue) {}
+  public void handleClue(PlayerClue clue) {
+  }
 
   @Override
-  public void handlePlayerDrawingCard(Player player, Card card) {}
+  public void handlePlayerDrawingCard(Player player, Card card) {
+  }
 
   @Override
-  public void handleDrawingCard(CardPlaceholder card) {}
+  public void handleDrawingCard(CardPlaceholder card) {
+  }
 }

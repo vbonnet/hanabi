@@ -9,8 +9,8 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 public class CardCounter {
-  Collection<Card> remainingCards;
   final HashSet<CardCounterListener> listeners = new HashSet<>();
+  Collection<Card> remainingCards;
 
   public CardCounter(Collection<Card> cards) {
     this.remainingCards = cards;

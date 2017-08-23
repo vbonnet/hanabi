@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CardInference implements  CardCounterListener {
+public class CardInference implements CardCounterListener {
   private MapCounter<Card> possibleCards = new MapCounter<>();
   private CardCounter cardCounter;
 
@@ -64,19 +64,19 @@ public class CardInference implements  CardCounterListener {
     updateInference();
   }
 
-  public void setValue(Object object ) {
+  public void setValue(Object object) {
     if (object instanceof CardColor) {
-      setColor((CardColor)object);
+      setColor((CardColor) object);
     } else if (object instanceof Integer) {
-      setNumber((Integer)object);
+      setNumber((Integer) object);
     }
   }
 
   public void removeValue(Object object) {
     if (object instanceof CardColor) {
-      removeColor((CardColor)object);
+      removeColor((CardColor) object);
     } else if (object instanceof Integer) {
-      removeNumber((Integer)object);
+      removeNumber((Integer) object);
     }
   }
 

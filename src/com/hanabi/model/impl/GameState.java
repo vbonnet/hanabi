@@ -8,10 +8,10 @@ import com.hanabi.model.facade.player.Player;
 import java.util.*;
 
 public class GameState {
-  private final Map<Player, Hand> hands = new HashMap<>();
   final DiscardPile discard = new DiscardPile();
   final List<Card> allCards;
   final Board board = new Board();
+  private final Map<Player, Hand> hands = new HashMap<>();
   private final Deck deck;
 
   int lives = 3;

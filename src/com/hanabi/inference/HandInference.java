@@ -11,9 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HandInference {
+  public final Map<CardPlaceholder, CardInference> hand = new HashMap<>();
   final PlayerGameView view;
   final CardCounter cardCounter;
-  public final Map<CardPlaceholder, CardInference> hand = new HashMap<>();
 
   public HandInference(PlayerGameView view) {
     this(view, new CardCounter(view.getAllCards()));

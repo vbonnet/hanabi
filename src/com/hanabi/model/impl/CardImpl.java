@@ -30,10 +30,10 @@ public class CardImpl implements Card {
   @Override
   public boolean equals(Object obj) {
     if (obj instanceof Card) {
-      Card otherCard = (Card)obj;
+      Card otherCard = (Card) obj;
       return (
           otherCard.getColor() == this.getColor() &&
-          otherCard.getNumber() == this.getNumber());
+              otherCard.getNumber() == this.getNumber());
     } else {
       return false;
     }

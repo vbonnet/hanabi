@@ -9,12 +9,17 @@ import java.util.Map;
 
 public interface PlayerGameView {
   int getSizeOfDeck();
+
   int getNumberOfClues();
+
   int getNumberOfLives();
 
   List<CardPlaceholder> getHand();
+
   List<Card> getAllCards();
+
   List<Card> getDiscard();
+
   List<Card> getPlayerHand(Player player) throws Exception;
 
   List<Player> getOtherPlayers();

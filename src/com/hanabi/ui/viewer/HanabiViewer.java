@@ -27,16 +27,10 @@ import java.util.stream.IntStream;
 
 
 public class HanabiViewer extends Application {
-  enum Cardinal {
-    LEFT, RIGHT, TOP, BOTTOM
-  }
-
   final Font INFERENCE_FONT = Font.font("Monospaced", FontWeight.BOLD, 16);
   final Font CARD_FONT = Font.font("Monospaced", FontWeight.BOLD, 25);
-
   final int CARD_WIDTH = 85;
   final int CARD_HEIGHT = 130;
-
   BorderPane root = new BorderPane();
   GameEngine engine;
   HumanPlayer player = new HumanPlayer();
@@ -72,7 +66,7 @@ public class HanabiViewer extends Application {
   private Pane drawPlayerHandWithInference(HumanPlayer player, Cardinal cardinal) {
     List<Pair<Card, CardInference>> hand = new ArrayList<>();
     Hand playerHand = engine.getState().getPlayerHand(player);
-      for (CardPlaceholder placeholder : playerHand.getPlaceholders()) {
+    for (CardPlaceholder placeholder : playerHand.getPlaceholders()) {
       hand.add(new Pair<>(
           engine.getState().getPlayerHand(player).getCard(placeholder),
           player.handInference.hand.get(placeholder)));
@@ -255,7 +249,7 @@ public class HanabiViewer extends Application {
     pane.getChildren().add(label);
   }
 
-  private String  colorToLetter(CardColor color) {
+  private String colorToLetter(CardColor color) {
     switch (color) {
       case RED:
         return "R";
@@ -285,6 +279,10 @@ public class HanabiViewer extends Application {
         return Color.YELLOW;
     }
     return Color.BLACK;
+  }
+
+  enum Cardinal {
+    LEFT, RIGHT, TOP, BOTTOM
   }
 
 }
