@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class CardCounter {
   final HashSet<CardCounterListener> listeners = new HashSet<>();
-  Collection<Card> remainingCards;
+  final Collection<Card> remainingCards;
 
   public CardCounter(Collection<Card> cards) {
     this.remainingCards = cards;

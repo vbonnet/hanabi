@@ -10,8 +10,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CardInference implements CardCounterListener {
-  private MapCounter<Card> possibleCards = new MapCounter<>();
-  private CardCounter cardCounter;
+  private final MapCounter<Card> possibleCards = new MapCounter<>();
+  private final CardCounter cardCounter;
 
   public CardInference(CardCounter cardCounter) {
     this.cardCounter = cardCounter;

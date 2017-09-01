@@ -5,7 +5,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 public class MapCounter<T> {
-  HashMap<T, Integer> counter = new HashMap<>();
+  final HashMap<T, Integer> counter = new HashMap<>();
 
   public void increment(T t) {
     if (counter.containsKey(t)) {

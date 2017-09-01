@@ -31,10 +31,10 @@ public class HanabiViewer extends Application {
   final Font CARD_FONT = Font.font("Monospaced", FontWeight.BOLD, 25);
   final int CARD_WIDTH = 85;
   final int CARD_HEIGHT = 130;
-  BorderPane root = new BorderPane();
+  final BorderPane root = new BorderPane();
   GameEngine engine;
   HumanPlayer player = new HumanPlayer();
-  List<HumanPlayer> players = new ArrayList<>();
+  final List<HumanPlayer> players = new ArrayList<>();
 
   public static void main(String[] args) {
     launch(args);
