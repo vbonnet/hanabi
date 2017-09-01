@@ -13,4 +13,9 @@ public class DiscardAction implements Action {
   public CardPlaceholder getCard() {
     return cardToDiscard;
   }
+
+  @Override
+  public ActionType getType() {
+    return ActionType.DISCARD;
+  }
 }

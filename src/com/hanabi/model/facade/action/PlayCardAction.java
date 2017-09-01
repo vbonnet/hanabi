@@ -12,4 +12,9 @@ public class PlayCardAction implements Action {
   public CardPlaceholder getCard() {
     return cardToPlay;
   }
+
+  @Override
+  public ActionType getType() {
+    return ActionType.PLAY_CARD;
+  }
 }

@@ -86,15 +86,19 @@ public class GameEngine {
 
   private boolean doAction(PlayerAction playerAction) throws Exception {
     Action action = playerAction.getAction();
-    if (action instanceof DiscardAction) {
-      DiscardAction discardAction = (DiscardAction) action;
-      discardCard(playerAction.getActingPlayer(), discardAction.getCard());
-    } else if (action instanceof GiveClueAction) {
-      GiveClueAction giveClueAction = (GiveClueAction) action;
-      giveClue(giveClueAction.getPlayerToClue(), giveClueAction.getClue());
-    } else if (action instanceof PlayCardAction) {
-      PlayCardAction playCardAction = (PlayCardAction) action;
-      playCard(playerAction.getActingPlayer(), playCardAction.getCard());
+    switch (action.getType()) {
+      case DISCARD:
+        DiscardAction discardAction = (DiscardAction) action;
+        discardCard(playerAction.getActingPlayer(), discardAction.getCard());
+        break;
+      case GIVE_CLUE:
+        GiveClueAction giveClueAction = (GiveClueAction) action;
+        giveClue(giveClueAction.getPlayerToClue(), giveClueAction.getClue());
+        break;
+      case PLAY_CARD:
+        PlayCardAction playCardAction = (PlayCardAction) action;
+        playCard(playerAction.getActingPlayer(), playCardAction.getCard());
+        break;
     }
 
     for (Player player : players) {

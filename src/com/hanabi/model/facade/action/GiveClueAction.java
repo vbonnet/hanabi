@@ -20,4 +20,8 @@ public class GiveClueAction implements Action {
     return playerToClue;
   }
 
+  @Override
+  public ActionType getType() {
+    return ActionType.GIVE_CLUE;
+  }
 }
