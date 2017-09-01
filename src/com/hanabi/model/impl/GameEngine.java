@@ -50,15 +50,19 @@ public class GameEngine {
     Player nextPlayer = players.get(0);
 
     // While there are still cards left in the deck, continue doing turns.
-    boolean gameOver = false;
-    while (!gameOver) {
+    boolean cardsRemaining = true;
+    while (cardsRemaining) {
       currentPlayer = nextPlayer;
+      nextPlayer = getNextPlayer(currentPlayer);
+
       PlayerAction action = currentPlayer.doTurn();
       if (action.getActingPlayer() != currentPlayer) {
         throw new Exception("be nice...");
       }
-      gameOver = doAction(action);
-      nextPlayer = getNextPlayer(currentPlayer);
+      cardsRemaining = doAction(action);
+      if (state.getNumberOfLives() == 0) {
+        break;
+      }
     }
 
     // Last round, each player takes one turn.
@@ -68,8 +72,9 @@ public class GameEngine {
         break;
       }
       currentPlayer = nextPlayer;
-      PlayerAction action = currentPlayer.doFinalTurn();
       nextPlayer = getNextPlayer(currentPlayer);
+
+      PlayerAction action = currentPlayer.doFinalTurn();
       doAction(action);
     } while (currentPlayer != lastPlayer);
 
@@ -99,7 +104,7 @@ public class GameEngine {
       player.handlePlayerTakingAction(action);
     }
 
-    return state.isGameOver();
+    return state.getNumberCardsInDeck() != 0;
   }
 
   private void giveClue(Player playerToClue, Clue clue) throws Exception {
