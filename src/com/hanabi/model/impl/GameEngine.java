@@ -1,9 +1,6 @@
 package com.hanabi.model.impl;
 
-import com.hanabi.model.facade.action.DiscardAction;
-import com.hanabi.model.facade.action.GiveClueAction;
-import com.hanabi.model.facade.action.PlayCardAction;
-import com.hanabi.model.facade.action.PlayerAction;
+import com.hanabi.model.facade.action.*;
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.clue.Clue;
 import com.hanabi.model.facade.player.Player;
@@ -55,11 +52,9 @@ public class GameEngine {
       currentPlayer = nextPlayer;
       nextPlayer = getNextPlayer(currentPlayer);
 
-      PlayerAction action = currentPlayer.doTurn();
-      if (action.getActingPlayer() != currentPlayer) {
-        throw new Exception("be nice...");
-      }
-      cardsRemaining = doAction(action);
+      Action action = currentPlayer.doTurn();
+      PlayerAction playerAction = new PlayerActionImpl(currentPlayer, action);
+      cardsRemaining = doAction(playerAction);
       if (state.getNumberOfLives() == 0) {
         break;
       }
@@ -74,8 +69,9 @@ public class GameEngine {
       currentPlayer = nextPlayer;
       nextPlayer = getNextPlayer(currentPlayer);
 
-      PlayerAction action = currentPlayer.doFinalTurn();
-      doAction(action);
+      Action action = currentPlayer.doFinalTurn();
+      PlayerAction playerAction = new PlayerActionImpl(currentPlayer, action);
+      doAction(playerAction);
     } while (currentPlayer != lastPlayer);
 
     return state.getScore();
@@ -88,20 +84,21 @@ public class GameEngine {
     return players.get(nextIndex);
   }
 
-  private boolean doAction(PlayerAction action) throws Exception {
+  private boolean doAction(PlayerAction playerAction) throws Exception {
+    Action action = playerAction.getAction();
     if (action instanceof DiscardAction) {
       DiscardAction discardAction = (DiscardAction) action;
-      discardCard(discardAction.getActingPlayer(), discardAction.getCard());
+      discardCard(playerAction.getActingPlayer(), discardAction.getCard());
     } else if (action instanceof GiveClueAction) {
       GiveClueAction giveClueAction = (GiveClueAction) action;
       giveClue(giveClueAction.getPlayerToClue(), giveClueAction.getClue());
     } else if (action instanceof PlayCardAction) {
       PlayCardAction playCardAction = (PlayCardAction) action;
-      playCard(playCardAction.getActingPlayer(), playCardAction.getCard());
+      playCard(playerAction.getActingPlayer(), playCardAction.getCard());
     }
 
     for (Player player : players) {
-      player.handlePlayerTakingAction(action);
+      player.handlePlayerTakingAction(playerAction);
     }
 
     return state.getNumberCardsInDeck() != 0;

@@ -3,13 +3,11 @@ package com.hanabi.model.facade.action;
 import com.hanabi.model.facade.clue.Clue;
 import com.hanabi.model.facade.player.Player;
 
-public class GiveClueAction implements PlayerAction {
-  private final Player actingPlayer;
+public class GiveClueAction implements Action {
   private final Player playerToClue;
   private final Clue clue;
 
-  public GiveClueAction(Player actingPlayer, Player playerToClue, Clue clue) {
-    this.actingPlayer = actingPlayer;
+  public GiveClueAction(Player playerToClue, Clue clue) {
     this.playerToClue = playerToClue;
     this.clue = clue;
   }
@@ -22,8 +20,4 @@ public class GiveClueAction implements PlayerAction {
     return playerToClue;
   }
 
-  @Override
-  public Player getActingPlayer() {
-    return actingPlayer;
-  }
 }

@@ -4,5 +4,6 @@ import com.hanabi.model.facade.player.Player;
 
 public interface PlayerAction {
   Player getActingPlayer();
+  Action getAction();
 }
 

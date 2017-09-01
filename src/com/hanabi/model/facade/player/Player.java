@@ -1,5 +1,6 @@
 package com.hanabi.model.facade.player;
 
+import com.hanabi.model.facade.action.Action;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.CardPlaceholder;
@@ -11,9 +12,9 @@ public interface Player {
 
   void initializeWithHand(List<CardPlaceholder> cards);
 
-  PlayerAction doTurn();
+  Action doTurn();
 
-  PlayerAction doFinalTurn();
+  Action doFinalTurn();
 
   void handlePlayerTakingAction(PlayerAction action);
 

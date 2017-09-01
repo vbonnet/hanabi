@@ -1,6 +1,7 @@
 package com.hanabi.ui.viewer;
 
 import com.hanabi.inference.HandInference;
+import com.hanabi.model.facade.action.Action;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.CardPlaceholder;
@@ -24,12 +25,12 @@ public class HumanPlayer implements Player {
   }
 
   @Override
-  public PlayerAction doTurn() {
+  public Action doTurn() {
     return null;
   }
 
   @Override
-  public PlayerAction doFinalTurn() {
+  public Action doFinalTurn() {
     return doTurn();
   }
 

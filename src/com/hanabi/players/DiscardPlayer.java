@@ -1,5 +1,6 @@
 package com.hanabi.players;
 
+import com.hanabi.model.facade.action.Action;
 import com.hanabi.model.facade.action.DiscardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
@@ -24,12 +25,12 @@ public class DiscardPlayer implements Player {
   }
 
   @Override
-  public PlayerAction doTurn() {
-    return new DiscardAction(this, myCards.get(0));
+  public Action doTurn() {
+    return new DiscardAction(myCards.get(0));
   }
 
   @Override
-  public PlayerAction doFinalTurn() {
+  public Action doFinalTurn() {
     return doTurn();
   }
 

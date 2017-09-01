@@ -1,5 +1,6 @@
 package com.hanabi.players;
 
+import com.hanabi.model.facade.action.Action;
 import com.hanabi.model.facade.action.PlayCardAction;
 import com.hanabi.model.facade.action.PlayerAction;
 import com.hanabi.model.facade.card.Card;
@@ -24,12 +25,12 @@ public class PlayFirstPlayer implements Player {
   }
 
   @Override
-  public PlayerAction doTurn() {
-    return new PlayCardAction(this, view.getHand().get(0));
+  public Action doTurn() {
+    return new PlayCardAction(view.getHand().get(0));
   }
 
   @Override
-  public PlayerAction doFinalTurn() {
+  public Action doFinalTurn() {
     return doTurn();
   }
 

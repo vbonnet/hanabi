@@ -3,21 +3,14 @@ package com.hanabi.model.facade.action;
 import com.hanabi.model.facade.card.CardPlaceholder;
 import com.hanabi.model.facade.player.Player;
 
-public class DiscardAction implements PlayerAction {
-  private final Player actingPlayer;
+public class DiscardAction implements Action {
   private final CardPlaceholder cardToDiscard;
 
-  public DiscardAction(Player actingPlayer, CardPlaceholder cardToDiscard) {
-    this.actingPlayer = actingPlayer;
+  public DiscardAction(CardPlaceholder cardToDiscard) {
     this.cardToDiscard = cardToDiscard;
   }
 
   public CardPlaceholder getCard() {
     return cardToDiscard;
-  }
-
-  @Override
-  public Player getActingPlayer() {
-    return actingPlayer;
   }
 }
