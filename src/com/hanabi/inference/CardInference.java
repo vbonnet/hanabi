@@ -5,6 +5,7 @@ import com.hanabi.model.facade.card.CardColor;
 import com.hanabi.util.MapCounter;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,12 +56,12 @@ public class CardInference implements CardCounterListener {
   }
 
   public void setNumber(Integer number) {
-    possibleCards.removeIf(card -> card.getNumber() != number);
+    possibleCards.removeIf(card -> !Objects.equals(card.getNumber(), number));
     updateInference();
   }
 
   public void removeNumber(Integer number) {
-    possibleCards.removeIf(card -> card.getNumber() == number);
+    possibleCards.removeIf(card -> Objects.equals(card.getNumber(), number));
     updateInference();
   }
 

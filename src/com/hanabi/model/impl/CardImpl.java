@@ -3,6 +3,8 @@ package com.hanabi.model.impl;
 import com.hanabi.model.facade.card.Card;
 import com.hanabi.model.facade.card.CardColor;
 
+import java.util.Objects;
+
 public class CardImpl implements Card {
   private final int value;
   private final CardColor color;
@@ -33,7 +35,7 @@ public class CardImpl implements Card {
       Card otherCard = (Card) obj;
       return (
           otherCard.getColor() == this.getColor() &&
-              otherCard.getNumber() == this.getNumber());
+              Objects.equals(otherCard.getNumber(), this.getNumber()));
     } else {
       return false;
     }

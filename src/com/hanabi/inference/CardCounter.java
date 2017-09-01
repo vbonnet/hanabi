@@ -6,6 +6,7 @@ import com.hanabi.model.facade.card.CardColor;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class CardCounter {
@@ -44,14 +45,14 @@ public class CardCounter {
   public Collection<Card> getCardsByNumber(Integer number) {
     return remainingCards
         .stream()
-        .filter(c -> c.getNumber() == number)
+        .filter(c -> c.getNumber().equals(number))
         .collect(Collectors.toList());
   }
 
   public Collection<Card> getCardsByColorAndNumber(CardColor color, Integer number) {
     return remainingCards
         .stream()
-        .filter(c -> c.getColor() == color && c.getNumber() == number)
+        .filter(c -> c.getColor().equals(color) && Objects.equals(c.getNumber(), number))
         .collect(Collectors.toList());
   }
 
